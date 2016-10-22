@@ -1,0 +1,57 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:u="urn:import:com.beta.rsatech.churchcradle.client.app.html.modules.sms.upload" xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<div class="col-sm-12">
+		<div id="wizardform" method="get" action="#">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<ul class="nav nav-tabs font-bold">
+						<li>
+							<a href="#step1" data-toggle="tab">CSV File</a>
+						</li>
+						<li>
+							<a href="#step2" data-toggle="tab">Compose</a>
+						</li>
+						<li>
+							<a href="#step3" data-toggle="tab">Summary</a>
+						</li>
+					</ul>
+				</div>
+				<div class="panel-body">
+					<p>This twitter bootstrap plugin builds a wizard out of a
+						formatter
+						tabbable structure. It allows to build a wizard
+						functionality using
+						buttons to go through the different
+						wizard steps and using events
+						allows to hook into each
+						step individually.</p>
+					<div class="line line-lg"></div>
+					
+					<div class="tab-content">
+						<div class="tab-pane" ui:field="step1" />
+						<div class="tab-pane" ui:field="step2" />
+						<div class="tab-pane" ui:field="step3" />
+						<ul class="pager wizard m-b-sm">
+							<li class="previous first" style="display:none;">
+								<a href="javascript:void(0)">First</a>
+							</li>
+							<li class="previous">
+								<a href="javascript:void(0)">Previous</a>
+							</li>
+							<li class="next last" style="display:none;">
+								<a href="javascript:void(0)">Last</a>
+							</li>
+							<li class="next">
+								<a href="javascript:void(0)">Next</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</ui:UiBinder>

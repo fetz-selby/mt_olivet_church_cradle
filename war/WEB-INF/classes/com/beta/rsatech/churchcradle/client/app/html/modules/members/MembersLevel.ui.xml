@@ -1,0 +1,19 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder">
+	<ui:style>
+	
+	</ui:style>
+	<aside class="aside-md b-r b-light bg-light lt">
+		<section class="vbox">
+			<header class="header clearfix bg b-b b-light">
+				
+			</header>
+			<section class="scrollable hover">
+				<div class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none" ui:field="listContainer">
+					<a href="#" class="list-group-item">  </a>
+
+				</div>
+			</section>
+		</section>
+	</aside>
+</ui:UiBinder>

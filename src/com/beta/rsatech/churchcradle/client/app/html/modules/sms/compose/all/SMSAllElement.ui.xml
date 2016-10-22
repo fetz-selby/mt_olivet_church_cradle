@@ -1,0 +1,51 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder">
+	<ui:style>
+
+	</ui:style>
+	<div class="panel-body">
+		<div class="row m-l-sm">
+			<div class="col-xs-5 bg-danger dk lter r-l">
+				<div class="wrapper" ui:field="groupBtn">
+					<i class="fa fa-group fa fa-3x m-t m-b-sm text-white"></i>
+					<p class="text-muted font-bold">Groups</p>
+					<div class="h4 font-bold">0/40</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="m-b-sm"></div>
+		
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group">
+				</div>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group">
+					<div class="col-sm-10">
+					    <label class="control-label">From</label>
+						<input type="text" class="form-control" />
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row m-b-sm"></div>
+
+		<div class="row">
+			<div class="form-group">
+				<div class="pull-right">SMS: 1</div>
+			</div>
+		</div>
+
+		<div class="row">
+
+		</div>
+		
+		
+	</div>
+</ui:UiBinder>

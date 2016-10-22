@@ -1,0 +1,50 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+			.img-style{width: 128px !important; height: 128px !important;}
+
+	</ui:style>
+	<g:HTMLPanel>
+		<div class="row">
+			<div class="text-center m-t">
+				<div class="thumb-lg avatar b-3x">
+					<g:Image styleName="{style.img-style}" ui:field="img" ></g:Image>
+				</div>
+			</div>
+			
+		</div>
+
+		<div class="panel-body">
+			<div role="form">
+				<div class="form-group">
+				    <small class="text-muted m-r-md col-sm-4">Name</small>
+					<strong class="h5" ui:field="nameField">John Smith</strong>
+				</div>
+				<div class="form-group">
+				    <small class="text-muted m-r-md col-sm-4">Mobile</small>
+					<strong class="h5" ui:field="msisdnField">+1 900 000 0000</strong>
+				</div>
+				<div class="form-group">
+				    <small class="text-muted m-r-md col-sm-4">Gender</small>
+					<strong class="h5" ui:field="genderField">Male</strong>
+				</div>
+				<div class="form-group">
+				    <small class="text-muted m-r-md col-sm-4">Birth Date</small>
+					<strong class="h5" ui:field="dobField">12-12-1986</strong>
+				</div>
+				<div class="form-group">
+				    <small class="text-muted m-r-md col-sm-4">Organisation(s)</small>
+					<strong class="h5" ui:field="orgField">Mens Fellowship, Choir, Multimedia</strong>
+				</div>
+				<div class="form-group">
+				    <small class="text-muted m-r-md col-sm-4">Class Leader</small>
+					<strong class="h5" ui:field="leaderField">Mr. Essel</strong>
+				</div>
+				<g:SimplePanel styleName="form-group m-t-lg" ui:field="checkboxPanel">
+				    
+				</g:SimplePanel>
+			</div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

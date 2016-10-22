@@ -1,0 +1,159 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+	<aside class="bg-black aside-md hidden-print hidden-xs" id="nav">
+								<section class="vbox">
+									<section class="w-f scrollable">
+										<div class="slim-scroll" data-height="auto"
+											data-disable-fade-out="true" data-distance="0" data-size="10px"
+											data-railOpacity="0.2">
+											<div class="clearfix wrapper dk nav-user hidden-xs">
+												<div class="dropdown">
+													<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+														<span class="thumb avatar pull-left m-r">
+															<img src="images/a0.png" class="dker" alt="..." />
+																<i class="on md b-black"></i>
+														</span>
+														<span class="hidden-nav-xs clear">
+															<span class="block m-t-xs">
+																<strong class="font-bold text-lt">Fetz Selby</strong>
+																<b class="caret"></b>
+															</span>
+															<span class="text-muted text-xs block"></span>
+														</span>
+													</a>
+													<ul class="dropdown-menu animated fadeInRight m-t-xs">
+														<li>
+															<span class="arrow top hidden-nav-xs"></span>
+															<a href="#settings">Settings</a>
+														</li>
+														<li>
+															<a href="#profile">Profile</a>
+														</li>
+														
+														<li>
+															<a href="#help">Help</a>
+														</li>
+														<li class="divider"></li>
+														<li>
+															<a href="#logout" data-toggle="ajaxModal">Logout</a>
+														</li>
+													</ul>
+												</div>
+											</div> <!-- nav -->
+											<nav class="nav-primary hidden-xs">
+												<div class="text-muted text-sm hidden-nav-xs padder m-t-sm m-b-sm">Start</div>
+												<ul class="nav nav-main" data-ride="collapse" id="navId">
+													<li class="active">
+														<a href="#dashboard" class="auto">
+															<i class="i i-statistics icon">
+															</i>
+															<span class="font-bold">Overview</span>
+														</a>
+													</li>
+													
+													<li>
+														<a href="#members" class="auto">
+															<i class="fa fa-users">
+															</i>
+															<span class="font-bold">Members</span>
+														</a>
+													</li>
+												
+													<li>
+														<a href="#appove" class="auto">
+															<i class="fa fa-check">
+															</i>
+															<span class="font-bold">Approve</span>
+														</a>
+													</li>
+
+													<li>
+														<a href="#" class="auto">
+															<span class="pull-right text-muted">
+																<i class="i i-circle-sm-o text"></i>
+																<i class="i i-circle-sm text-active"></i>
+															</span>
+															<i class="fa fa-bullhorn icon">
+															</i>
+															<span class="font-bold">Announcement</span>
+														</a>
+														<ul class="nav dk">
+															<li>
+																<a href="#marriage" class="auto">
+																	<i class="i i-dot"></i>
+																	<span>Marriage</span>
+																</a>
+															</li>
+															<li>
+																<a href="#events" class="auto">
+																	<i class="i i-dot"></i>
+																	<span>Events</span>
+																</a>
+															</li>
+															<li>
+																<a href="#funeral" class="auto">
+																	<i class="i i-dot"></i>
+																	<span>Funeral</span>
+																</a>
+															</li>
+														</ul>
+													</li>
+
+													<li>
+														<a href="#sms" class="auto">
+															<i class="i i-mail icon">
+															</i>
+															<span class="font-bold">SMS</span>
+														</a>
+													</li>
+
+													<li>
+														<a href="#bible_readings" class="auto">
+															<i class="i i-statistics icon">
+															</i>
+															<span class="font-bold">Bible Readings</span>
+														</a>
+													</li>
+
+													<li>
+														<a href="#elibrary" class="auto">
+															<i class="i i-statistics icon">
+															</i>
+															<span class="font-bold">E-Library</span>
+														</a>
+													</li>
+
+													<li>
+														<a href="#settings" class="auto">
+															<i class="i i-settings icon">
+															</i>
+															<span class="font-bold">Settings</span>
+														</a>
+													</li>
+													</ul>
+
+												<div class="line dk hidden-nav-xs"></div>
+												
+											</nav>
+										</div>
+									</section>
+									<footer class="footer hidden-xs no-padder text-center-nav-xs">
+										<a href="modal.lockme.html" data-toggle="ajaxModal"
+											class="btn btn-icon icon-muted btn-inactive pull-right m-l-xs m-r-xs hidden-nav-xs">
+											<i class="i i-logout"></i>
+										</a>
+										<a href="#nav" data-toggle="class:nav-xs"
+											class="btn btn-icon icon-muted btn-inactive m-l-xs m-r-xs">
+											<i class="i i-circleleft text"></i>
+											<i class="i i-circleright text-active"></i>
+										</a>
+									</footer>
+								</section>
+							</aside> <!-- /.aside -->
+	</g:HTMLPanel>
+</ui:UiBinder> 

@@ -1,0 +1,17 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder">
+	<ui:style>
+
+	</ui:style>
+	<div class="col-xs-3 bg-primary dk lter r-l m-r-sm m-b-sm" ui:field="elementContainer">
+		<div class="wrapper">
+			<div class="checkbox i-checks">
+				<label>
+					<input type="checkbox" checked="" ui:field="check"/>
+						<i></i>
+					<div class="h4 font-bold" ui:field="groupName">Finance</div>
+				</label>
+			</div>
+		</div>
+	</div>
+</ui:UiBinder>

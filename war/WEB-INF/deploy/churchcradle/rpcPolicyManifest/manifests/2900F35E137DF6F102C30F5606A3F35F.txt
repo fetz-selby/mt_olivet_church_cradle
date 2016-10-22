@@ -1,0 +1,2 @@
+serviceClass: com.beta.rsatech.churchcradle.client.PaymentService
+path: 56F135AED766912C0627984C37E4DF60.gwt.rpc

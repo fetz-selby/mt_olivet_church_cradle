@@ -1,0 +1,35 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder">
+	<ui:style>
+	.main-style{height: 218px; padding: 0;}
+	.header-style{height: 95px; padding: 7px;}
+	.i-style{padding-right: 5px;}
+	</ui:style>
+	<section class="col-sm-3 panel panel-default {style.main-style}">
+		<header class="bg-danger no-border {style.header-style}">
+			<div class="clearfix">
+				
+				<div class="text-center">
+					<small class="h4 text-muted" ui:field="desc">Art director</small>
+				</div>
+			</div>
+			
+		</header>
+		<div class="list-group no-radius alt">
+			<a class="list-group-item" href="javascript:void(0)">
+				<i class="i i-users3 icon-muted text-danger {style.i-style}"></i>
+				<small ui:field="smallVenue" class="text-danger">Olivet Chapel</small>
+			</a>
+			<a class="list-group-item" href="javascript:void(0)">
+				<i class="fa fa-money icon-muted text-danger {style.i-style}"></i>
+				<small ui:field="smallTime" class="text-danger">12.00pm</small>
+			</a>
+			<a class="list-group-item" href="javascript:void(0)">
+				<i class="fa fa-calendar icon-muted text-danger {style.i-style}"></i>
+				<small ui:field="smallDate" class="text-danger">Sat, 22nd December, 2015</small>
+			</a>
+			
+		</div>
+	</section>
+
+</ui:UiBinder>

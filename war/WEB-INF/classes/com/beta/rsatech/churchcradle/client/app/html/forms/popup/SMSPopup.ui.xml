@@ -1,0 +1,40 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.beta.rsatech.churchcradle.client.widgets">
+	<ui:style>
+		.main{width: 280px;}
+		.textarea-style{line-height: 2; width: 100%; min-height: 100px; max-height: 150px;}
+	</ui:style>
+	<g:HTMLPanel styleName="col-sm-6 {style.main}">
+		<section class="panel panel-default">
+			<header class="panel-heading font-bold">Send SMS</header>
+
+			<div class="alert alert-danger hide" ui:field="errorDiv">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<i class="fa fa-ban-circle"></i>
+				<strong ui:field="titleErrorMessage"></strong>
+			</div>
+
+			<div class="panel-body">
+				<div role="form">
+					<div class="form-group">
+						<label>Display</label>
+						<g:TextBox styleName="form-control" ui:field="displayName" />
+					</div>
+					<div class="form-group">
+						<label>Reciepient</label>
+						<g:TextBox styleName="form-control" ui:field="receiverName" />
+					</div>
+					
+					<div class="form-group">
+						<label class="pull-right" ui:field="smsCounter">SMS 1</label>
+						<c:SMSTextArea ui:field="textArea"></c:SMSTextArea>
+						<label class="pull-right" ui:field="characterCounter"></label>
+					</div>
+					
+					<g:Button styleName="btn btn-sm btn-default" ui:field="saveBtn">Done</g:Button>
+				</div>
+			</div>
+		</section>
+	</g:HTMLPanel>
+</ui:UiBinder> 

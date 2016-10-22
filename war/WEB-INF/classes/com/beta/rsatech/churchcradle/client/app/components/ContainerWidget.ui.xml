@@ -1,0 +1,14 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.beta.rsatech.churchcradle.client.app.components">
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+		<section>
+			<section class="hbox stretch">
+				<c:SideBarWidget></c:SideBarWidget>
+			</section>
+		</section>
+	</g:HTMLPanel>
+</ui:UiBinder> 

@@ -1,0 +1,21 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder">
+	<ui:style>
+	
+	</ui:style>
+	<aside class="aside b-r b-light bg-light">
+		<section class="vbox">
+			<header class="header clearfix dk b-b b-light">
+				<a class="btn btn-sm btn-link btn-icon pull-right hide" ui:field="addGroupAnchor">
+					<i class="i i-plus i-2x"></i>
+				</a>
+				<p class="h4 font-thin pull-left m-r-sm m-b-sm">Leaders</p>
+			</header>
+			<section class="scrollable hover">
+				<div class="list-group no-radius no-border no-bg m-t-n-xxs m-b-none" ui:field="listContainer">
+					<a href="#" class="list-group-item"> Loading ... </a>
+				</div>
+			</section>
+		</section>
+	</aside>
+</ui:UiBinder>

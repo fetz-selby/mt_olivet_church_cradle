@@ -1,0 +1,17 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder">
+	<ui:style>
+	
+	</ui:style>
+	<div class="panel-body">
+		<div class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-2 control-label">File input</label>
+				<div class="col-sm-10">
+					<input type="file" class="filestyle" data-icon="false"
+						data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s" />
+				</div>
+			</div>
+		</div>
+	</div>
+</ui:UiBinder>

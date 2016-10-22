@@ -1,0 +1,29 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.beta.rsatech.churchcradle.client.widgets">
+	<ui:style>
+		.main-style{height: 182px; padding: 0;}
+		.header-style{height:95px; padding: 7px;}
+		.i-style{padding-right: 5px;}
+	</ui:style>
+	<g:HTMLPanel styleName="col-xs-12 col-sm-12 col-lg-3 col-md-3 panel panel-default {style.main-style}">
+		<header class="bg-danger no-border {style.header-style}">
+			<div class="clearfix">
+				<div class="">
+					<small class="text-white" ui:field="message">Art director</small>
+				</div>
+			</div>
+
+		</header>
+		<div class="list-group no-radius alt" ui:field="detailList">
+			<a class="list-group-item" href="javascript:void(0)">
+				<i class="fa fa-sort-numeric-asc icon-muted text-danger {style.i-style}"></i>
+				<small ui:field="smallLength" class="text-danger">2</small>
+			</a>
+			<a class="list-group-item" href="javascript:void(0)">
+				<i class="fa fa-calendar icon-muted text-danger {style.i-style}"></i>
+				<small ui:field="smallDate" class="text-danger">Sat, 22nd December, 2015</small>
+			</a>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

@@ -1,0 +1,29 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.beta.rsatech.churchcradle.client.widgets">
+	<ui:style>
+		.main{width: 400px;}
+		.detail-style{margin-top: 10px;}
+	</ui:style>
+	<g:HTMLPanel styleName="col-sm-6 {style.main}">
+		<section class="panel panel-default">
+			<header class="panel-heading font-bold">Group Selection</header>
+
+			<div class="panel-body">
+				<div role="form">
+					<footer class="panel-footer text-center">
+						<g:FlowPanel styleName="row pull-out" ui:field="widgetContainer"></g:FlowPanel>
+					</footer>
+					<div class="form-group {style.detail-style}">
+						<i class="pull-left fa fa-users m-r-md fa-2x"></i>
+						<label class="h3" ui:field="membersCounter">0</label>
+						<g:SimplePanel styleName="pull-right" ui:field="selectAllPanel">
+						    
+						</g:SimplePanel>
+					</div>
+					<g:Button styleName="btn btn-sm btn-default" ui:field="submitBtn">Done</g:Button>
+				</div>
+			</div>
+		</section>
+	</g:HTMLPanel>
+</ui:UiBinder>

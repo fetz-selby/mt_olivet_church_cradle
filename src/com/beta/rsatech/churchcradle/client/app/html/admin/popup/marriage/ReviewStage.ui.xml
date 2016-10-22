@@ -1,0 +1,56 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.header-style{padding: 0;}
+		.couple-style{padding: 7px 7px;}
+		.i-style{padding-right: 5px;}
+		.img-style{width: 150px !important; height: 150px !important;}
+
+	</ui:style>
+	<g:HTMLPanel>
+		<header class="bg-primary no-border">
+			<div class="clearfix {style.couple-style}">
+				<a href="javascript:void(0)" class="pull-left avatar b-3x m-r">
+					<img src="images/no-image.jpg" class="{style.img-style}" ui:field="maleAvatar"/>
+				</a>
+				<div class="pull-left">
+					<div class="h4 m-t-xs m-b-xs" ui:field="maleNameDiv">
+						John.Smith
+					</div>
+					<small class="text-muted" ui:field="maleOccupation">Art director</small>
+				</div>
+			</div>
+			<div class="row"></div>
+			<div class="clearfix {style.couple-style}">
+				<a href="javascript:void(0)" class="pull-left avatar b-3x m-r">
+					<img src="images/no-image.jpg" class="{style.img-style}" ui:field="femaleAvatar"/>
+				</a>
+				<div class="pull-left">
+					<div class="h4 m-t-xs m-b-xs" ui:field="femaleNameDiv">
+						Jane.Doe
+					</div>
+					<small class="text-muted" ui:field="femaleOccupation">Singer</small>
+				</div>
+			</div>
+		</header>
+
+		<div class="panel-body">
+			<div role="form">
+				<div class="form-group">
+					<small class="text-muted m-r-md col-sm-4">Venue</small>
+					<strong class="h5" ui:field="venueField">National Theater</strong>
+				</div>
+				<div class="form-group">
+					<small class="text-muted m-r-md col-sm-4">Date</small>
+					<strong class="h5" ui:field="dateField">2015-06-12</strong>
+				</div>
+				<div class="form-group">
+					<small class="text-muted m-r-md col-sm-4">Description</small>
+					<strong class="h5" ui:field="descriptionField">You're all condialy invited</strong>
+				</div>
+				
+			</div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

@@ -1,0 +1,30 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.li-style{padding: 10px;}
+	</ui:style>
+	<g:HTMLPanel>
+		<ul class="nav" ui:field="dateList">
+			<li class="b-b {style.li-style}">
+				<div class="row">
+					<div class="col-sm-2">
+						<a href="javascript:void(0)" ui:field="chevronAnchorLeft">
+							<i
+								class="col-sm-2 fa fa-chevron-left pull-left m-t-xs text-xs icon-muted"></i>
+						</a>
+					</div>
+					<div class="col-sm-8 text-center">
+						<span class="text-white h4" ui:field="yearSpan">2015</span>
+					</div>
+					<div class="col-sm-2">
+						<a href="javascript:void(0)" ui:field="chevronAnchorRight">
+							<i
+								class="col-sm-2 fa fa-chevron-right pull-right m-t-xs text-xs icon-muted"></i>
+						</a>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</g:HTMLPanel>
+</ui:UiBinder> 

@@ -1,0 +1,21 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.scroll-style{overflow-y: auto; min-height: 265px !important;}
+	</ui:style>
+	<g:HTMLPanel styleName="panel-body">
+		<div role="form">
+
+			<div class="form-group">
+				<g:SimplePanel ui:field="searchContainer"></g:SimplePanel>
+			</div>
+
+			<div class="form-group">
+			    <small>Organisations</small>
+				<g:FlowPanel styleName="form-control textarea-style {style.scroll-style}" ui:field="orgContainer"></g:FlowPanel>
+			</div>
+
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

@@ -1,0 +1,33 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.beta.rsatech.churchcradle.client.widgets">
+	<ui:style>
+			.main{width: 300px; top: 64px;}
+	</ui:style>
+	<g:HTMLPanel styleName="col-sm-6 {style.main}">
+		<section class="panel panel-default">
+			<header class="panel-heading font-bold">Tithe Details<a href="javascript:void(0)" class="pull-right" ui:field="closeAnchor">x</a></header>
+			
+			<div class="alert alert-danger hide" ui:field="errorDiv">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<i class="fa fa-ban-circle"></i>
+				<strong ui:field="titleErrorMessage"></strong>
+			</div>
+			
+			<div class="alert alert-primary hide" ui:field="loadingDiv">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<i class="fa fa-ban-circle"></i>
+				<strong>Loading ...</strong>
+			</div>
+			
+			<div class="panel-body">
+				<div role="form">
+					<div class="h4 list-group-item text-primary text-center m-b-lg" ui:field="monthTitle"></div>
+					<div ui:field="rowContainer"></div>
+					
+					<g:Button styleName="btn btn-sm btn-default pull-right" ui:field="submitBtn">Done</g:Button>
+				</div>
+			</div>
+		</section>
+	</g:HTMLPanel>
+</ui:UiBinder>

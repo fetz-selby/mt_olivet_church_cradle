@@ -1,0 +1,44 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.header-style{height: 130px;}
+		.couple-style{padding: 7px 7px;}
+		.i-style{padding-right: 5px;}
+		.img-style{width: 250px; height: 130px;}
+	</ui:style>
+	<g:HTMLPanel>
+		<header class="bg-primary no-border {style.header-style}">
+			<div class="row">
+				<div class="text-center m-t">
+					<div class="thumb-lg avatar b-3x">
+						<img src="images/offering.jpg" class="{style.img-style}"></img>
+					</div>
+				</div>
+			</div>
+			<div class="row"></div>
+		</header>
+
+		<div class="panel-body">
+			<div role="form">
+			    
+			    <div class="form-group">
+					<small class="text-muted m-r-md col-sm-4">Church</small>
+					<strong class="h5" ui:field="churchField">Annoymous</strong>
+				</div>
+				<div class="form-group">
+					<small class="text-muted m-r-md col-sm-4">Name</small>
+					<strong class="h5" ui:field="nameField">Annoymous</strong>
+				</div>
+				<div class="form-group">
+					<small class="text-muted m-r-md col-sm-4">Month</small>
+					<strong class="h5" ui:field="monthField">January</strong>
+				</div>
+				<div class="form-group">
+					<small class="text-muted m-r-md col-sm-4">Amount</small>
+					<strong class="h5" ui:field="amountField">1,000</strong>
+				</div>
+			</div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder>

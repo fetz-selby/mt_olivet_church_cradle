@@ -1,0 +1,84 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder">
+	<ui:style>
+		.img-style{width: 250px !important; height: 250px !important;}
+
+	</ui:style>
+	<section>
+		<header class="header bg-light lter clearfix b-b b-light">
+			<a class="btn btn-sm btn-primary hide" ui:field="profileEdit">
+				<i class="i i-pencil"></i>
+				Edit
+			</a>
+		</header>
+		<section class="vbox bg-white">
+			<section class="scrollable wrapper-lg">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="text-center">
+							<img src="images/no-image.jpg" alt="..." class="img-circle m-b {style.img-style}"
+								ui:field="avatar" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<h3 class="font-bold m-b-none m-t-none" ui:field="h3name">Mark Adjei</h3>
+						<p ui:field="emailParagraph">mark.adjei@gmail.com</p>
+						<p>
+							<i class="fa fa-lg fa-circle-o text-primary m-r-sm"></i>
+							<strong ui:field="occupationStrong">Finance Minister</strong>
+						</p>
+						<ul class="nav nav-pills nav-stacked hide" ui:field="showMessageUL">
+
+							<li class="bg-light">
+								<a href="javascript:void(0)" ui:field="sendSMSAnchor">
+									<i class="i i-chat m-r-sm"></i>
+									Send Message
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="line b-b m-t m-b"></div>
+				<div class="wrapper">
+					<div class="row m-b">
+						<div class="col-xs-6">
+							<small>Cell Phone</small>
+							<div class="text-lt font-bold" ui:field="msisdnDiv">1243 0303 0333</div>
+						</div>
+						<div class="col-xs-6">
+							<small>Employer</small>
+							<div class="text-lt font-bold" ui:field="employerDiv">RSA Technologies</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-6">
+							<small>Address</small>
+							<div class="text-lt font-bold" ui:field="addressDiv">No. 12, SSNIT.
+								Dansoman</div>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="line b-b m-t m-b"></div>
+
+
+				<div class="wrapper">
+					<div class="row m-b">
+						<div class="col-xs-6">
+							<small>Class Leader</small>
+							<div class="text-lt font-bold" ui:field="classLeaderDiv">Mr. Essel</div>
+						</div>
+						<div class="col-xs-6">
+							<small>Organisation</small>
+							<div class="text-lt font-bold" ui:field="orgDiv">Choir</div>
+						</div>
+					</div>
+
+				</div>
+
+			</section>
+		</section>
+	</section>
+</ui:UiBinder>

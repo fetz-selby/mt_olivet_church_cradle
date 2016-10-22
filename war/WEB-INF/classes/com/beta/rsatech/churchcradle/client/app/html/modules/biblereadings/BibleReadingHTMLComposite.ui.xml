@@ -1,0 +1,35 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder">
+	<ui:style>
+	.main-style{height: 242px; padding: 0;}
+	.header-style{height: 95px; padding: 7px;}
+	.i-style{padding-right: 5px;}
+	.theme-style{height: 80px; overflow-y: auto;}
+	</ui:style>
+	<section class="col-xs-12 col-sm-12 col-lg-3 col-md-3 panel panel-default {style.main-style}">
+		<header class="bg-danger no-border {style.header-style}">
+			<div class="clearfix">
+				
+				<div class="text-center">
+					<small class="h4 text-muted" ui:field="desc">Art director</small>
+				</div>
+			</div>
+			
+		</header>
+		<div class="list-group no-radius alt">
+			<a class="list-group-item" href="javascript:void(0)">
+				<i class="fa fa-user icon-muted text-danger {style.i-style}"></i>
+				<small ui:field="smallName" class="text-danger">Rev. Dr Chapel</small>
+			</a>
+			<a class="list-group-item {style.theme-style}" href="javascript:void(0)">
+				<i class="fa fa-quote-right icon-muted text-danger {style.i-style}"></i>
+				<small ui:field="smalltheme" class="text-danger">Forgiveness</small>
+			</a>
+			<a class="list-group-item" href="javascript:void(0)">
+				<i class="fa fa-calendar icon-muted text-danger {style.i-style}"></i>
+				<small ui:field="smallDate" class="text-danger">Sat, 22nd December, 2015</small>
+			</a>
+		</div>
+	</section>
+
+</ui:UiBinder>

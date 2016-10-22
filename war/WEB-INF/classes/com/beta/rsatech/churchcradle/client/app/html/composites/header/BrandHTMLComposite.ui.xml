@@ -1,0 +1,20 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder">
+	<ui:style>
+	
+	</ui:style>
+	<div class="navbar-header aside-md dk">
+		<a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open"
+			data-target="#nav,html">
+			<i class="fa fa-bars"></i>
+		</a>
+		<a href="index.html" class="navbar-brand">
+			<img src="images/logo.png" class="m-r-sm" alt="scale" />
+			<span class="hidden-nav-xs" ui:field="orgName">Mt. Olivet</span>
+		</a>
+		<a class="btn btn-link visible-xs" data-toggle="dropdown"
+			data-target=".user">
+			<i class="fa fa-cog"></i>
+		</a>
+	</div>
+</ui:UiBinder>

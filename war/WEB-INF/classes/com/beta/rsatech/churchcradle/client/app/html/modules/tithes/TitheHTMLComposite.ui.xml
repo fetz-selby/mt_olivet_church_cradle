@@ -1,0 +1,31 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder">
+	<ui:style>
+		.main-style{height: 138px; padding: 0; cursor: pointer;}
+		.header-style{height: 95px; padding: 7px;}
+		.i-style{padding-right: 5px;}
+	</ui:style>
+	<section class="col-sm-3 panel panel-default {style.main-style}"
+		ui:field="mainPanel">
+		<header class="no-border {style.header-style}" ui:field="header">
+			<div class="clearfix">
+
+				<div class="text-center">
+					<small class="h4 text-muted" ui:field="desc">Art director</small>
+				</div>
+			</div>
+
+		</header>
+		<div class="list-group no-radius alt">
+			<a class="list-group-item pull-left" href="javascript:void(0)">
+				<i class="fa fa-money icon-muted {style.i-style}" ui:field="iElement"></i>
+				<small ui:field="smallAmount">Rev. Dr Chapel</small>
+
+			</a>
+			<div class="list-group-item pull-right hide" ui:field="detailsDiv">
+				<a class="text-success" href="javascript:void(0)" ui:field="detailsAnchor">details</a>
+			</div>
+		</div>
+	</section>
+
+</ui:UiBinder>

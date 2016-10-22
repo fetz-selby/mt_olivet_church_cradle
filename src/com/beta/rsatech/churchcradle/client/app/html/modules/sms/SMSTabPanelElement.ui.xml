@@ -1,0 +1,29 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	.header-style{padding: 0;}
+	</ui:style>
+	<div class="panel panel-default">
+		<header class="panel-heading bg-light">
+			<ul class="nav nav-tabs nav-justified">
+				<li class="active">
+					<a href="#smsregular" data-toggle="tab">Regular</a>
+				</li>
+				<li>
+					<a href="#smsall" data-toggle="tab">Segement</a>
+				</li>
+			</ul>
+		</header>
+		<div class="panel-body {style.header-style}">
+			<div class="tab-content">
+				<div class="tab-pane active" id="smsregular">
+					<div ui:field="smsRegularContainer"></div>
+				</div>
+				<div class="tab-pane" id="smsall">
+					<div ui:field="smsAllContainer"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</ui:UiBinder> 

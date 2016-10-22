@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+              http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5" xmlns="http://java.sun.com/xml/ns/javaee">
+
+	<!-- Servlets -->
+	<servlet>
+		<servlet-name>greetServlet</servlet-name>
+		<servlet-class>com.beta.rsatech.churchcradle.server.GreetingServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>greetServlet</servlet-name>
+		<url-pattern>/churchcradle/greet</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>listServlet</servlet-name>
+		<servlet-class>com.beta.rsatech.churchcradle.server.ListServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>listServlet</servlet-name>
+		<url-pattern>/churchcradle/list</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>addServlet</servlet-name>
+		<servlet-class>com.beta.rsatech.churchcradle.server.AddServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>addServlet</servlet-name>
+		<url-pattern>/churchcradle/add</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>preview</servlet-name>
+		<servlet-class>com.beta.rsatech.churchcradle.server.ImagePreviewServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>preview</servlet-name>
+		<url-pattern>/churchcradle/preview</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>blobsave</servlet-name>
+		<servlet-class>com.beta.rsatech.churchcradle.server.BlobstorePreviewServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>blobsave</servlet-name>
+		<url-pattern>/blobsave</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>mtolivet</servlet-name>
+		<servlet-class>com.beta.rsatech.churchcradle.server.MtOlivetServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>mtolivet</servlet-name>
+		<url-pattern>/mtolivet</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>smsnotify</servlet-name>
+		<servlet-class>com.beta.rsatech.churchcradle.server.SMSNotifyServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>smsnotify</servlet-name>
+		<url-pattern>/churchcradle/smsnotify</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>updateServlet</servlet-name>
+		<servlet-class>com.beta.rsatech.churchcradle.server.UpdateServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>updateServlet</servlet-name>
+		<url-pattern>/churchcradle/update</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>payServlet</servlet-name>
+		<servlet-class>com.beta.rsatech.churchcradle.server.PaymentServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>payServlet</servlet-name>
+		<url-pattern>/churchcradle/pay</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
+		<servlet-name>controlServlet</servlet-name>
+		<servlet-class>com.beta.rsatech.churchcradle.server.utils.ParamController</servlet-class>
+
+		<init-param>
+			<param-name>sms_username</param-name>
+			<param-value>rsat-momc2</param-value>
+		</init-param>
+		
+		<init-param>
+			<param-name>sms_password</param-name>
+			<param-value>pa55w0rd</param-value>
+		</init-param>
+		
+		<init-param>
+			<param-name>sms_port</param-name>
+			<param-value>8080</param-value>
+		</init-param>
+		
+		<init-param>
+			<param-name>sms_url</param-name>
+			<param-value>http://121.241.242.114</param-value>
+		</init-param>
+		
+		<init-param>
+			<param-name>dbname</param-name>
+			<param-value>church_cradle</param-value>
+		</init-param>
+
+		<init-param>
+			<param-name>dbpassword</param-name>
+			<param-value></param-value>
+		</init-param>
+
+		<init-param>
+			<param-name>dbuser</param-name>
+			<param-value>root</param-value>
+		</init-param>
+
+		<init-param>
+			<param-name>dbport</param-name>
+			<param-value>3306</param-value>
+		</init-param>
+
+		<init-param>
+			<param-name>dbip</param-name>
+			<param-value>127.0.0.1</param-value>
+		</init-param>
+
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+
+		<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+
+</web-app>
