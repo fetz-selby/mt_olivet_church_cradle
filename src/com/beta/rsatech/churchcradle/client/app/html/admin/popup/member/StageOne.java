@@ -62,20 +62,25 @@ public class StageOne extends Composite implements IsWizardable<MemberModel>{
 			msisdnField.setText(model.getMsisdn());
 			//img.setUrl(model.getAvatar());
 			
-			if(model.getAvatar() != null && !model.getAvatar().trim().isEmpty()){
-				Utils.retrieveFromBlobstore(model.getAvatar(), new GeneralEventHandler<BlobstoreModel>() {
-					
-					@Override
-					public void onSuccess(BlobstoreModel t) {
-						img.setUrl(t.getUrl());
-					}
-					
-					@Override
-					public void onError() {
-						// TODO Auto-generated method stub
-						
-					}
-				});
+//			if(model.getAvatar() != null && !model.getAvatar().trim().isEmpty()){
+//				Utils.retrieveFromBlobstore(model.getAvatar(), new GeneralEventHandler<BlobstoreModel>() {
+//					
+//					@Override
+//					public void onSuccess(BlobstoreModel t) {
+//						//Window.alert("Image url => "+t.getUrl());
+//						img.setUrl(t.getUrl());
+//					}
+//					
+//					@Override
+//					public void onError() {
+//						// TODO Auto-generated method stub
+//						
+//					}
+//				});
+//			}
+			
+			if(model.getAvatar() != null){
+				img.setUrl(model.getAvatar());
 			}
 			
 
@@ -100,8 +105,11 @@ public class StageOne extends Composite implements IsWizardable<MemberModel>{
 						
 						@Override
 						public void onSuccess(Void result) {
+							//Window.alert("Image url => "+avatarString);
 							img.setUrl(avatarString);
-							model.setAvatar(blobKey);							
+							//model.setAvatar(blobKey);	
+							
+							model.setAvatar(avatarString);							
 						}
 						
 						@Override
@@ -112,7 +120,8 @@ public class StageOne extends Composite implements IsWizardable<MemberModel>{
 					});
 				}else{
 					img.setUrl(avatarString);
-					model.setAvatar(blobKey);
+					//model.setAvatar(blobKey);
+					model.setAvatar(avatarString);
 				}
 			}
 		});

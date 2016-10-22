@@ -41,20 +41,24 @@ public class ReviewStage extends Composite implements IsWizardable<MemberModel>{
 	private void initComponents(){
 		//img.setUrl(model.getAvatar());
 
-		if(model.getAvatar() != null && !model.getAvatar().trim().isEmpty()){
-			Utils.retrieveFromBlobstore(model.getAvatar(), new GeneralEventHandler<BlobstoreModel>() {
-				
-				@Override
-				public void onSuccess(BlobstoreModel t) {
-					img.setUrl(t.getUrl());
-				}
-				
-				@Override
-				public void onError() {
-					// TODO Auto-generated method stub
-					
-				}
-			});
+//		if(model.getAvatar() != null && !model.getAvatar().trim().isEmpty()){
+//			Utils.retrieveFromBlobstore(model.getAvatar(), new GeneralEventHandler<BlobstoreModel>() {
+//				
+//				@Override
+//				public void onSuccess(BlobstoreModel t) {
+//					img.setUrl(t.getUrl());
+//				}
+//				
+//				@Override
+//				public void onError() {
+//					// TODO Auto-generated method stub
+//					
+//				}
+//			});
+//		}
+		
+		if(model.getAvatar() != null){
+			img.setUrl(model.getAvatar());
 		}
 		
 		nameField.setInnerText(Utils.getTruncatedText(model.getFirstName()+" "+model.getLastName(), 16));
