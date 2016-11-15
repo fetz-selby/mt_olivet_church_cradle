@@ -206,5 +206,7 @@ public interface AppConstants {
 	String LITE = "L";
 	String BASIC = "B";
 	String FULL = "F";
+	
+	String DEFAULT_NATIONALITY = "Ghanian";
 
 }

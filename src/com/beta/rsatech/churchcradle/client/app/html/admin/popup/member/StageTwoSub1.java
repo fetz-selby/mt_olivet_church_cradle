@@ -175,7 +175,7 @@ public class StageTwoSub1 extends Composite implements IsWizardable<MemberModel>
 	}
 	
 	public void next(){
-		wizardHandler.onValidateComplete(WizardStage.THREE, model);
+		wizardHandler.onValidateComplete(WizardStage.TWO_SUB2, model);
 	}
 	
 	public void back(){

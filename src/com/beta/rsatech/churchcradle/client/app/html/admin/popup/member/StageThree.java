@@ -201,7 +201,7 @@ public class StageThree extends Composite implements IsWizardable<MemberModel>{
 	}
 	@Override
 	public void back() {
-		wizardHandler.onValidateComplete(WizardStage.TWO_SUB, model);
+		wizardHandler.onValidateComplete(WizardStage.TWO_SUB2, model);
 	}
 	
 }

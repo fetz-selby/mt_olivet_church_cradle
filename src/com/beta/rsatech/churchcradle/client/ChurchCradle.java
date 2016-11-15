@@ -222,8 +222,25 @@ public class ChurchCradle implements EntryPoint{
 			@Override
 			public void onSuccess(HashMap<String, String> result) {
 				GlobalResources.getInstance().setEducationalLevelMap(result);
+				loadRegions();
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+	}
+	
+	private void loadRegions(){
+		GlobalResources.getInstance().getListRPC().getRegionsList(new AsyncCallback<HashMap<String,String>>() {
+			
+			@Override
+			public void onSuccess(HashMap<String, String> result) {
+				GlobalResources.getInstance().setRegionsMap(result);
 				AppController mainApp = new AppController(RootPanel.get("headerContainer"), RootPanel.get("nav"), RootPanel.get("content"), RootPanel.get("odd"), GlobalResources.getInstance().getEventBus());
-				mainApp.go();					
+				mainApp.go();
 			}
 			
 			@Override

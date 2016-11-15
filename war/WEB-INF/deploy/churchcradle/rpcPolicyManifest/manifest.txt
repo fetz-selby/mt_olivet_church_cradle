@@ -1,6 +1,6 @@
 # Module churchcradle
 # RPC service class, partial path of RPC policy file
+com.beta.rsatech.churchcradle.client.ListService, C792FE60E6E53C583B59837E1427FE43.gwt.rpc
 com.beta.rsatech.churchcradle.client.PaymentService, 56F135AED766912C0627984C37E4DF60.gwt.rpc
-com.beta.rsatech.churchcradle.client.ListService, 39EFD784B0B670BB7251D544FC9AD495.gwt.rpc
-com.beta.rsatech.churchcradle.client.AddService, 0C57F4A4BE33D1A5682B1D5BF0FA1E7F.gwt.rpc
-com.beta.rsatech.churchcradle.client.UpdateService, A2FFEE9A07ED32757081275FDC923023.gwt.rpc
+com.beta.rsatech.churchcradle.client.UpdateService, 5696AFA954D402FC7CB41AA86A11CAE3.gwt.rpc
+com.beta.rsatech.churchcradle.client.AddService, 266E2998E01BE3809A57A141303EF053.gwt.rpc

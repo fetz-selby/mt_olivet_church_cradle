@@ -32,6 +32,18 @@
 				</div>
 				
 				<div class="form-group">
+					<g:TextBox styleName="form-control" ui:field="hometownField"></g:TextBox>
+				</div>
+				
+				<div class="form-group">
+					<g:TextBox styleName="form-control" ui:field="nationalityField"></g:TextBox>
+				</div>
+				
+				<div class="form-group">
+					<g:ListBox styleName="form-control" ui:field="regionsField"></g:ListBox>
+				</div>
+				
+				<div class="form-group">
 					<g:ListBox styleName="form-control" ui:field="eLevelField"></g:ListBox>
 				</div>
 				

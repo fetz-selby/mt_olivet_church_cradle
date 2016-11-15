@@ -6,7 +6,6 @@ import com.beta.rsatech.churchcradle.client.utils.Utils;
 import com.beta.rsatech.churchcradle.client.widgets.CustomFileUpload;
 import com.beta.rsatech.churchcradle.client.widgets.CustomFileUpload.CustomFileUploadEventHandler;
 import com.beta.rsatech.churchcradle.shared.AppConstants;
-import com.beta.rsatech.churchcradle.shared.BlobstoreModel;
 import com.beta.rsatech.churchcradle.shared.MemberModel;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -136,10 +135,10 @@ public class StageOne extends Composite implements IsWizardable<MemberModel>{
 	@Override
 	public void validateAndProceed() {
 		
-		if(isAvatarEmpty()){
-			doPublishError("Please select a picture");
-			return;
-		}
+//		if(isAvatarEmpty()){
+//			doPublishError("Please select a picture");
+//			return;
+//		}
 
 		if(firstNameField.getText().trim().isEmpty()){
 			doPublishError("First Name cannot be empty!");
@@ -232,14 +231,6 @@ public class StageOne extends Composite implements IsWizardable<MemberModel>{
 				}
 			});
 		}
-	}
-
-	private boolean isAvatarEmpty(){
-
-		if(img.getUrl().contains(AppConstants.NO_IMAGE)){
-			return true;
-		}
-		return false;
 	}
 
 	private void doPrepareMemberModel(){

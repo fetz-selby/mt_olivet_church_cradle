@@ -41,14 +41,19 @@ public class DBConnection {
 			if (SystemProperty.environment.value() ==
 					SystemProperty.Environment.Value.Production) {
 				// Load the class that provides the new "jdbc:google:mysql://" prefix.
-				Class.forName("com.mysql.jdbc.GoogleDriver");
-				url = "jdbc:google:mysql://cradleapps:alpha-db/olivet_church_cradle_gl?user=root&autoReconnect=true";
-//				Class.forName("com.mysql.jdbc.Driver");
+				//Class.forName("com.mysql.jdbc.GoogleDriver");
+				Class.forName("com.mysql.jdbc.Driver");
+
+				//url = "jdbc:google:mysql://cradleapps:alpha-db/olivet_church_cradle_gl?user=root&autoReconnect=true";
+				url = "jdbc:mysql://127.0.0.1:3306/church_cradle_web_google?user=root&autoReconnect=true";
+				//url = "jdbc:mysql://127.0.0.1:3306/church_cradle_web_google?user=root&password=root&autoReconnect=true";
+
 			} else {
 				// Local MySQL instance to use during development.
 				Class.forName("com.mysql.jdbc.Driver");
 				//url = "jdbc:mysql://173.194.250.73:3306/olivet_church_cradle_gl?user=root&autoReconnect=true";
 				url = "jdbc:mysql://127.0.0.1:3306/church_cradle_web_google?user=root&autoReconnect=true";
+				//url = "jdbc:mysql://127.0.0.1:3306/church_cradle_web_google?user=root&password=root&autoReconnect=true";
 
 			}
 			con = (Connection)DriverManager.getConnection(url);

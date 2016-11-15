@@ -113,25 +113,33 @@ public class AddMemberPopup extends Composite {
 					wizard = new StageTwoSub1(model);
 					stageIndex = 2;
 					break;
+				case TWO_SUB2:
+					wizard = new StageTwoSub2(model);
+					stageIndex = 3;
+					break;
 				case THREE:
 					wizard = new StageThree(model);
-					stageIndex = 3;
+					stageIndex = 4;
 					break;
 				case FOUR:
 					wizard = new StageFour(model);
-					stageIndex = 4;
+					stageIndex = 5;
 					break;
 				case FIVE:
 					wizard = new StageFive(model);
-					stageIndex = 5;
+					stageIndex = 6;
 					break;
 				case SIX:
 					wizard = new StageSix(model);
-					stageIndex = 6;
+					stageIndex = 7;
+					break;
+				case SIX_SUB1:
+					wizard = new StageSixSub1(model);
+					stageIndex = 8;
 					break;
 				case REVIEW:
 					wizard = new ReviewStage(model);
-					stageIndex = 7;
+					stageIndex = 9;
 					break;
 				case DONE:
 					if(!model.isUpdate()){
@@ -151,7 +159,7 @@ public class AddMemberPopup extends Composite {
 					showPrevious(false);
 				}
 
-				if(stageIndex == 7){
+				if(stageIndex == 9){
 					nextBtn.setText(AppConstants.BUTTON_DONE);
 				}else{
 					nextBtn.setText(AppConstants.BUTTON_NEXT);

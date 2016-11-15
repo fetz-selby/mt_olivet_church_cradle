@@ -1,0 +1,45 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+	.clearfix {
+		height: 0;
+		clear: both;
+	}
+	
+	.container {
+		padding: 5px;
+	}
+	
+	.container .infobox {
+		float: left;
+		width: 200px;
+		height: 20px;
+		padding: 20px 0 0 0;
+	}
+	
+	.container .positionbox {
+		float: left;
+		width: 100px;
+		padding: 20px 0 0 0;
+	}
+	
+	.container .frombox {
+		float: left;
+		width: 55px;
+		padding: 20px 0 0 0;
+	}
+	
+	.container .endbox {
+		float: left;
+		width: 55px;
+	}
+	</ui:style>
+	<g:HTMLPanel styleName="{style.container}">
+		<g:TextBox ui:field="infobox" styleName="{style.infobox}"></g:TextBox>
+		<g:TextBox ui:field="positionbox" styleName="{style.positionbox}"></g:TextBox>
+		<g:TextBox ui:field="frombox" styleName="{style.frombox}"></g:TextBox>
+		<g:TextBox ui:field="endbox" styleName="{style.endbox}"></g:TextBox>
+		<div class="{style.clearfix}"></div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

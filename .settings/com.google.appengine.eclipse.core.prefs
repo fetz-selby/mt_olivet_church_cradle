@@ -6,4 +6,4 @@ gaeHrdEnabled=true
 gaeLaunchAppInBrowser=true
 googleCloudSqlEnabled=false
 localDevMySqlEnabled=true
-validationExclusions=src/com/beta/rsatech/churchcradle/server/ImagePreviewServlet.java|src/com/beta/rsatech/churchcradle/server/utils/Utils.java
+validationExclusions=src/com/beta/rsatech/churchcradle/server/ImagePreviewServlet.java|src/com/beta/rsatech/churchcradle/server/utils/Utils.java|src/com/beta/rsatech/churchcradle/server/BlobstorePreviewServlet.java

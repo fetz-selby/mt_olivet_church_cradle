@@ -156,4 +156,6 @@ public interface ListServiceAsync {
 	void getAllChurches(AsyncCallback<ArrayList<ChurchModel>> callback);
 
 	void getEducationalList(AsyncCallback<HashMap<String, String>> callback);
+
+	void getRegionsList(AsyncCallback<HashMap<String, String>> callback);
 }

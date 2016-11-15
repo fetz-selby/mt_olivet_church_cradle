@@ -90,5 +90,5 @@ public interface ListService extends RemoteService{
 	ArrayList<ChurchModel> getAllChurches();
 	
 	HashMap<String, String> getEducationalList();
-
+	HashMap<String, String> getRegionsList();
 }

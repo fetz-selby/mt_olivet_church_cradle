@@ -85,7 +85,7 @@ public class StageSix extends Composite implements IsWizardable<MemberModel>{
 	}
 	@Override
 	public void next() {
-		wizardHandler.onValidateComplete(WizardStage.REVIEW, model);
+		wizardHandler.onValidateComplete(WizardStage.SIX_SUB1, model);
 	}
 	@Override
 	public void back() {

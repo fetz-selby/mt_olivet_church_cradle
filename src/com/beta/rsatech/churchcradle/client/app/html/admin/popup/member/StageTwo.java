@@ -25,6 +25,7 @@ public class StageTwo extends Composite implements IsWizardable<MemberModel>{
 	private MemberModel model;
 	private boolean isMale, isFemale;
 	private HashMap<String, Integer> eduTrackMap;
+	private HashMap<String, Integer> regionsMap;
 	private static StageTwoUiBinder uiBinder = GWT
 			.create(StageTwoUiBinder.class);
 
@@ -32,8 +33,8 @@ public class StageTwo extends Composite implements IsWizardable<MemberModel>{
 	}
 
 	@UiField InputElement maleInput, femaleInput;
-	@UiField TextBox occupationField, dobField, employerField;
-	@UiField ListBox eLevelField;
+	@UiField TextBox occupationField, dobField, employerField, nationalityField, hometownField;
+	@UiField ListBox eLevelField, regionsField;
 	@UiField TextArea addressField;
 	
 	public StageTwo(MemberModel model) {
@@ -48,13 +49,20 @@ public class StageTwo extends Composite implements IsWizardable<MemberModel>{
 		dobField.getElement().setAttribute("placeholder", "Date of Birth  (yyyy-mm-dd)");
 		occupationField.getElement().setAttribute("placeholder", "Occupation/Profession");
 		employerField.getElement().setAttribute("placeholder", "Company / Institution");
+		hometownField.getElement().setAttribute("placeholder", "Hometown");
+		nationalityField.getElement().setAttribute("placeholder", AppConstants.DEFAULT_NATIONALITY);
+		
 		initEducationList();
+		initRegions();
 		
 		if(model != null){
 			addressField.setText(model.getAddress() != null ? model.getAddress() : "");
 			dobField.setText(model.getDateOfBirth() != null ? model.getDateOfBirth() : "");
 			occupationField.setText(model.getOccupation() != null ? model.getOccupation() : "");
 			employerField.setText(model.getEmployer() != null ? model.getEmployer() : "");
+			nationalityField.setText(model.getNationality() != null ? model.getNationality() : "");
+			hometownField.setText(model.getHometown() != null ? model.getHometown() : "");
+			
 			if(model.getGender() != null && model.getGender().equalsIgnoreCase(AppConstants.MALE)){
 				enableMaleCheck();
 			}else if(model.getGender() != null && model.getGender().equalsIgnoreCase(AppConstants.FEMALE)){
@@ -63,6 +71,10 @@ public class StageTwo extends Composite implements IsWizardable<MemberModel>{
 			
 			if(model.geteLevel() != null && !model.geteLevel().isEmpty()){
 				eLevelField.setItemSelected(eduTrackMap.get(model.geteLevel()), true);
+			}
+			
+			if(model.getRegion() != null && !model.getRegion().isEmpty()){
+				regionsField.setItemSelected(regionsMap.get(model.getRegion()), true);
 			}
 		}
 	}
@@ -75,6 +87,19 @@ public class StageTwo extends Composite implements IsWizardable<MemberModel>{
 		for(String key : eduMap.keySet()){
 			eLevelField.addItem(key, eduMap.get(key));
 			eduTrackMap.put(eduMap.get(key), index);
+			
+			index ++;
+		}
+	}
+	
+	private void initRegions(){
+		HashMap<String, String> regMap = GlobalResources.getInstance().getRegionsMap();
+		regionsMap = new HashMap<String, Integer>();
+		
+		int index = 0;
+		for(String key : regMap.keySet()){
+			regionsField.addItem(key, regMap.get(key));
+			regionsMap.put(regMap.get(key), index);
 			
 			index ++;
 		}
@@ -139,9 +164,18 @@ public class StageTwo extends Composite implements IsWizardable<MemberModel>{
 			return;
 		}
 		
-		doPrepareMemberModel();
-		next();
+		if(regionsField.getSelectedIndex() == 0){
+			doPublishError("Please select a region");
+			return;
+		}
 		
+		if(hometownField.getText().trim().length() < 5){
+			doPublishError("Please specify hometown");
+			return;
+		}
+			
+		doPrepareMemberModel();
+		next();		
 	}
 	
 	public void next(){
@@ -159,6 +193,9 @@ public class StageTwo extends Composite implements IsWizardable<MemberModel>{
 		model.setOccupation(occupationField.getText().trim());
 		model.setEmployer(employerField.getText().trim());
 		model.seteLevel(eLevelField.getValue(eLevelField.getSelectedIndex()));
+		model.setRegion(regionsField.getValue(regionsField.getSelectedIndex()));
+		model.setNationality(nationalityField.getText().trim().isEmpty()?AppConstants.DEFAULT_NATIONALITY:nationalityField.getText().trim());
+		model.setNationality(hometownField.getText().trim());
 	}
 	
 	private void doPublishError(String message){

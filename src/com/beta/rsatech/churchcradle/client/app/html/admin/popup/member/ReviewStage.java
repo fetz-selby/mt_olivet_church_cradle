@@ -1,12 +1,10 @@
 package com.beta.rsatech.churchcradle.client.app.html.admin.popup.member;
 
 import com.beta.rsatech.churchcradle.client.elements.StrongElement;
-import com.beta.rsatech.churchcradle.client.utils.GeneralEventHandler;
 import com.beta.rsatech.churchcradle.client.utils.Utils;
 import com.beta.rsatech.churchcradle.client.widgets.CustomCheckBox;
 import com.beta.rsatech.churchcradle.client.widgets.CustomCheckBox.CustomCheckBoxEventHandler;
 import com.beta.rsatech.churchcradle.shared.AppConstants;
-import com.beta.rsatech.churchcradle.shared.BlobstoreModel;
 import com.beta.rsatech.churchcradle.shared.MemberModel;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;

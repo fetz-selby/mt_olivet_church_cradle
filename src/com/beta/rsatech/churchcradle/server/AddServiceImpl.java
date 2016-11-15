@@ -34,6 +34,7 @@ public class AddServiceImpl extends RemoteServiceServlet implements AddService{
 	public int addGroup(GroupModel model, int memberId) {
 		PreparedStatement prstmt = null;
 		con = DBConnection.getConnection();
+		
 
 		try{
 			int accountId = getAccountId(memberId, model.getChurchId());
@@ -151,7 +152,7 @@ public class AddServiceImpl extends RemoteServiceServlet implements AddService{
 				
 				con = DBConnection.getConnection();
 				
-				prstmt = (PreparedStatement) con.prepareStatement("insert into members (fname,lname,email,msisdn,avatar,password,church_id,billing_id,is_admin,can_sms,created_ts,approved_by,modified_by,created_by,approve_modules,class_id,organisations,tithes,occupation,address,dob,gender,prefs,employer,status,entry_modules,can_view_payments,commence_year) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ");
+				prstmt = (PreparedStatement) con.prepareStatement("insert into members (fname,lname,email,msisdn,avatar,password,church_id,billing_id,is_admin,can_sms,created_ts,approved_by,modified_by,created_by,approve_modules,class_id,organisations,tithes,occupation,address,dob,gender,prefs,employer,status,entry_modules,can_view_payments,commence_year,nationality,region,spouse,hometown,kin,kin_msisdn,baptism_date,baptism_location,previous_church,baptism_minister,relation_status,edu_level,hometown) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ");
 				prstmt.setString(1, Utils.getCapitalizedWord(model.getFirstName()));
 				prstmt.setString(2, Utils.getCapitalizedWord(model.getLastName()));
 				prstmt.setString(3, model.getEmail() == null ? "" : model.getEmail());
@@ -181,6 +182,20 @@ public class AddServiceImpl extends RemoteServiceServlet implements AddService{
 				prstmt.setString(27, model.isCanViewPayments()?"Y":"N");
 				prstmt.setString(28, model.getDateOfCommencement());
 				
+				
+				prstmt.setString(29, model.getNationality());
+				prstmt.setString(30, model.getRegion());
+				prstmt.setString(31, model.getSpouseName());
+				prstmt.setString(32, model.getHometown());
+				prstmt.setString(33, model.getKinName());
+				prstmt.setString(34, model.getKinMsisdn());
+				prstmt.setString(35, model.getDateOfBaptism());
+				prstmt.setString(36, model.getPlaceOfBaptism());
+				prstmt.setString(37, model.getPreviousChurch());
+				prstmt.setString(38, model.getNameOfMinister());
+				prstmt.setString(39, model.getMaritalStatus());				
+				prstmt.setString(40, model.geteLevel());				
+				prstmt.setString(41, model.getHometown());				
 
 				int success = prstmt.executeUpdate();
 				if(success > 0){

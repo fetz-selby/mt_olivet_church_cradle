@@ -21,7 +21,7 @@ public class GlobalResources {
 	private PaymentServiceAsync paymentRPC;
 	private HandlerManager eventBus;
 	private HashMap<Integer, String> organisationMap, classesLeadersMap, approveModuleMap, membersMap, entryModuleMap;
-	private HashMap<String, String> educationalLevelMap;
+	private HashMap<String, String> educationalLevelMap, regionsMap;
 	private UserModel model;
 	private ChurchModel churchModel;
 	private ArrayList<DateModel> datesList;
@@ -183,6 +183,14 @@ public class GlobalResources {
 
 	public void setEducationalLevelMap(HashMap<String, String> educationalLevelMap) {
 		this.educationalLevelMap = educationalLevelMap;
+	}
+
+	public HashMap<String, String> getRegionsMap() {
+		return regionsMap;
+	}
+
+	public void setRegionsMap(HashMap<String, String> regionsMap) {
+		this.regionsMap = regionsMap;
 	}
 	
 }

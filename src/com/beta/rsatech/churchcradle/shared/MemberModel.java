@@ -7,8 +7,8 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 public class MemberModel implements IsSerializable{
 	private int id, churchId, billingId, classId, modifiedBy, createdBy, approvedBy;
 	private String firstName, password, lastName, middleName, spouseName, kinName, kinMsisdn, eLevel, email, msisdn, address, dateOfBirth, dateOfCommencement, gender, createdTs, modifiedTs, approveModules, entryModules, organisations, occupation, employer, tithes, status, avatar, maritalStatus;
-	private boolean isAdmin, canSMS, isUpdate, canViewPayments, isDeleteMember;
-	private String oldPassword, otherInfo = "";
+	private boolean isAdmin, canSMS, isUpdate, canViewPayments, isDeleteMember, isCommunicant;
+	private String oldPassword, otherInfo = "", placeOfBaptism = "", dateOfBaptism = "", previousChurch = "", nameOfMinister = "", nationality = "", hometown = "", region = "";
 	
 	private ArrayList<PositionHistoryModel> historyList = new ArrayList<PositionHistoryModel>();
 	
@@ -332,6 +332,70 @@ public class MemberModel implements IsSerializable{
 
 	public void seteLevel(String eLevel) {
 		this.eLevel = eLevel;
+	}
+
+	public boolean isCommunicant() {
+		return isCommunicant;
+	}
+
+	public void setCommunicant(boolean isCommunicant) {
+		this.isCommunicant = isCommunicant;
+	}
+
+	public String getPlaceOfBaptism() {
+		return placeOfBaptism;
+	}
+
+	public void setPlaceOfBaptism(String placeOfBaptism) {
+		this.placeOfBaptism = placeOfBaptism;
+	}
+
+	public String getDateOfBaptism() {
+		return dateOfBaptism;
+	}
+
+	public void setDateOfBaptism(String dateOfBaptism) {
+		this.dateOfBaptism = dateOfBaptism;
+	}
+
+	public String getPreviousChurch() {
+		return previousChurch;
+	}
+
+	public void setPreviousChurch(String previousChurch) {
+		this.previousChurch = previousChurch;
+	}
+
+	public String getNameOfMinister() {
+		return nameOfMinister;
+	}
+
+	public void setNameOfMinister(String nameOfMinister) {
+		this.nameOfMinister = nameOfMinister;
+	}
+
+	public String getNationality() {
+		return nationality;
+	}
+
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
+
+	public String getHometown() {
+		return hometown;
+	}
+
+	public void setHometown(String hometown) {
+		this.hometown = hometown;
+	}
+
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
 	}
 	
 }

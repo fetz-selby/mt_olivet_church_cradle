@@ -7,6 +7,7 @@ public class UserModel implements IsSerializable{
 	private int id, churchId, billingId, classId, modifiedBy;
 	private String firstName, lastName, avatar, items, tithes, email, msisdn, modifiedTs, prefs, address, createdTs, approveModules, entryModules, groups, occupation, dateOfBirth, gender, employer;
 	private boolean isAdmin, isSMSEnabled, canViewPayments;
+	private String placeOfBaptism = "", dateOfBaptism = "", previousChurch = "", nameOfMinister = "", nationality = "", hometown = "", region = "", spouseName = "", kinName = "", kinMsisdn = "", maritalStatus = "", level = "";
 	
 	public UserModel(){}
 
@@ -217,6 +218,101 @@ public class UserModel implements IsSerializable{
 	public void setCanViewPayments(boolean canViewPayments) {
 		this.canViewPayments = canViewPayments;
 	}
-	
+
+	public String getPlaceOfBaptism() {
+		return placeOfBaptism;
+	}
+
+	public void setPlaceOfBaptism(String placeOfBaptism) {
+		this.placeOfBaptism = placeOfBaptism;
+	}
+
+	public String getDateOfBaptism() {
+		return dateOfBaptism;
+	}
+
+	public void setDateOfBaptism(String dateOfBaptism) {
+		this.dateOfBaptism = dateOfBaptism;
+	}
+
+	public String getPreviousChurch() {
+		return previousChurch;
+	}
+
+	public void setPreviousChurch(String previousChurch) {
+		this.previousChurch = previousChurch;
+	}
+
+	public String getNameOfMinister() {
+		return nameOfMinister;
+	}
+
+	public void setNameOfMinister(String nameOfMinister) {
+		this.nameOfMinister = nameOfMinister;
+	}
+
+	public String getNationality() {
+		return nationality;
+	}
+
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
+
+	public String getHometown() {
+		return hometown;
+	}
+
+	public void setHometown(String hometown) {
+		this.hometown = hometown;
+	}
+
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+
+	public String getSpouseName() {
+		return spouseName;
+	}
+
+	public void setSpouseName(String spouseName) {
+		this.spouseName = spouseName;
+	}
+
+	public String getKinName() {
+		return kinName;
+	}
+
+	public void setKinName(String kinName) {
+		this.kinName = kinName;
+	}
+
+	public String getKinMsisdn() {
+		return kinMsisdn;
+	}
+
+	public void setKinMsisdn(String kinMsisdn) {
+		this.kinMsisdn = kinMsisdn;
+	}
+
+	public String getMaritalStatus() {
+		return maritalStatus;
+	}
+
+	public void setMaritalStatus(String maritalStatus) {
+		this.maritalStatus = maritalStatus;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
 	
 }
