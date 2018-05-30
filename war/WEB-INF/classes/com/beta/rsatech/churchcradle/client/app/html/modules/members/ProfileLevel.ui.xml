@@ -2,7 +2,9 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder">
 	<ui:style>
 		.img-style{width: 250px !important; height: 250px !important;}
-
+		.search-container-style{padding-top: 10px;}
+		.id-style{color: #811B0D}
+		.keep-close{float: left;}
 	</ui:style>
 	<section>
 		<header class="header bg-light lter clearfix b-b b-light">
@@ -10,6 +12,20 @@
 				<i class="i i-pencil"></i>
 				Edit
 			</a>
+			<div class="pull-right {style.search-container-style}">
+			    <div class="col-md-10">
+			    	<div class="form-group {style.keep-close}">
+						<input type="text" class="form-control" ui:field="searchField" placeholder="Enter name/email/mobile/ID"/>
+					</div>
+				</div>
+				
+			    <div class="col-md-2" ui:field="searchDiv">
+				<a class="btn btn-sm btn-primary pull-right {style.keep-close}" ui:field="searchBtn">
+					<i class="fa fa-search"></i>
+					search
+				</a>
+				</div>
+			</div>
 		</header>
 		<section class="vbox bg-white">
 			<section class="scrollable wrapper-lg">
@@ -21,6 +37,7 @@
 						</div>
 					</div>
 					<div class="col-md-6">
+					    <h5 class="font-bold m-b-none m-t-none {style.id-style}" ui:field="idfield">1</h5>
 						<h3 class="font-bold m-b-none m-t-none" ui:field="h3name">Mark Adjei</h3>
 						<p ui:field="emailParagraph">mark.adjei@gmail.com</p>
 						<p>

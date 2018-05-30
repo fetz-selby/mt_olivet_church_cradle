@@ -4,23 +4,18 @@
 	<ui:style>
 	.scroll-style {
 		overflow-y: auto;
-		min-height: 265px !important;
+		max-height: 265px !important;
 	}
-	.button-style{
-		float: right;
-	}
-
 	
 	</ui:style>
 	<g:HTMLPanel styleName="panel-body">
 	    <div class="form-group">
-<!-- 	        <div class="{style.button-style}">
- -->	            <button class="pull-right btn-primary" ui:field="addButton">Add</button>
-	           	<button class="pull-left btn-primary" ui:field="clearButton">Clear</button>
-<!-- 	        </div>
- -->	    </div>
+	            <button class="pull-right btn btn-primary" ui:field="addButton">Add</button>
+	           	<button class="pull-left btn btn-primary" ui:field="clearButton">Clear</button>
+	    </div>
+	    
 		<div class="form-group">
-			<g:FlowPanel ui:field="widgetContainer"></g:FlowPanel>
+			<g:FlowPanel ui:field="widgetContainer" styleName="{style.scroll-style}"></g:FlowPanel>
 		</div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

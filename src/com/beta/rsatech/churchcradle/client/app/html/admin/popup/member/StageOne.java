@@ -59,7 +59,12 @@ public class StageOne extends Composite implements IsWizardable<MemberModel>{
 			otherNameField.setText(model.getMiddleName());
 			emailField.setText(model.getEmail());
 			msisdnField.setText(model.getMsisdn());
-			//img.setUrl(model.getAvatar());
+			
+			if(model.getAvatar() != null && !model.getAvatar().trim().isEmpty()){
+				img.setUrl(AppConstants.PHOTO_URL+model.getAvatar());
+			}else{
+				img.setUrl(AppConstants.NO_IMAGE);
+			}
 			
 //			if(model.getAvatar() != null && !model.getAvatar().trim().isEmpty()){
 //				Utils.retrieveFromBlobstore(model.getAvatar(), new GeneralEventHandler<BlobstoreModel>() {

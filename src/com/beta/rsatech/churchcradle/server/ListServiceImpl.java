@@ -29,6 +29,7 @@ import com.beta.rsatech.churchcradle.shared.MarriageModel;
 import com.beta.rsatech.churchcradle.shared.MemberModel;
 import com.beta.rsatech.churchcradle.shared.MyOfferingModel;
 import com.beta.rsatech.churchcradle.shared.OfferingModel;
+import com.beta.rsatech.churchcradle.shared.PositionHistoryModel;
 import com.beta.rsatech.churchcradle.shared.PowerLeaderModel;
 import com.beta.rsatech.churchcradle.shared.SMSModel;
 import com.beta.rsatech.churchcradle.shared.SpecialOfferingModel;
@@ -264,7 +265,7 @@ public class ListServiceImpl extends RemoteServiceServlet implements ListService
 		con = DBConnection.getConnection();
 
 		try{
-			prstmt = (PreparedStatement) con.prepareStatement("select mem.prefs,mem.commence_year,mem.id,mem.can_view_payments,mem.fname,mem.lname,mem.avatar,mem.approved_by,mem.entry_modules,mem.created_by,mem.email,mem.dob,mem.msisdn,mem.tithes,mem.modified_by,mem.modified_ts,mem.organisations,date(mem.created_ts) as created_ts,mem.occupation,mem.address,mem.employer,mem.gender,mem.approve_modules,mem.class_id,mem.billing_id,mem.church_id,mem.is_admin,mem.can_sms,mem.region,mem.nationality,mem.kin,mem.kin_msisdn,mem.relation_status,mem.spouse,mem.hometown,mem.baptism_date,mem.baptism_location,mem.baptism_minister,mem.previous_church,mem.edu_level from members as mem where mem.church_id = ? and mem.status = 'A' and mem.organisations regexp ? order by mem.fname asc");
+			prstmt = (PreparedStatement) con.prepareStatement("select mem.prefs,mem.commence_year,mem.id,mem.can_view_payments,mem.mname,mem.fname,mem.lname,mem.avatar,mem.approved_by,mem.entry_modules,mem.created_by,mem.email,mem.dob,mem.msisdn,mem.tithes,mem.modified_by,mem.modified_ts,mem.organisations,date(mem.created_ts) as created_ts,mem.occupation,mem.address,mem.employer,mem.gender,mem.approve_modules,mem.class_id,mem.billing_id,mem.church_id,mem.is_admin,mem.can_sms,mem.region,mem.nationality,mem.kin,mem.kin_msisdn,mem.relation_status,mem.spouse,mem.hometown,mem.baptism_date,mem.baptism_location,mem.baptism_minister,mem.previous_church,mem.edu_level from members as mem where mem.church_id = ? and mem.status = 'A' and mem.organisations regexp ? order by mem.fname asc");
 			prstmt.setInt(1, churchId);
 			prstmt.setString(2, Utils.getRegexp(",", groupId));
 
@@ -319,6 +320,7 @@ public class ListServiceImpl extends RemoteServiceServlet implements ListService
 					String baptismMinister = results.getString("baptism_minister");
 					String previousChurch = results.getString("previous_church");
 					String level = results.getString("edu_level");
+					String mname = results.getString("mname");
 					
 
 					MemberModel member = new MemberModel();
@@ -362,12 +364,57 @@ public class ListServiceImpl extends RemoteServiceServlet implements ListService
 					member.setNameOfMinister(baptismMinister);
 					member.setPreviousChurch(previousChurch);
 					member.seteLevel(level);
+					member.setMiddleName(mname);
+					
+					//Grab all positions
+					member.setHistoryList(getAllPositions(id));
 
 					members.add(member);
 				}
 				//con.close();
 				return members;
 			}
+		}catch(SQLException sql){
+			sql.printStackTrace();
+		}
+		return null;
+	}
+	
+	private ArrayList<PositionHistoryModel> getAllPositions(int memberId){
+		PreparedStatement prstmt = null;
+		con = DBConnection.getConnection();
+		
+
+		try{
+			prstmt = (PreparedStatement) con.prepareStatement("select id,created_by,description,position,begin_date,end_date,church_id from serve_history where member_id = ? and status = 'A'");
+			prstmt.setInt(1, memberId);
+
+			ResultSet results = prstmt.executeQuery();
+			if(results != null){
+				ArrayList<PositionHistoryModel> positionHistoryList = new ArrayList<PositionHistoryModel>();
+				while(results.next()){
+					int id = results.getInt("id");
+					int churchId = results.getInt("church_id");
+					String name = results.getString("description");
+					String position = results.getString("position");
+					String beginDate = results.getString("begin_date");
+					String endDate = results.getString("end_date");
+					
+					PositionHistoryModel model = new PositionHistoryModel();
+					model.setId(id);
+					model.setMemberId(memberId);
+					model.setChurchId(churchId);
+					model.setName(name);
+					model.setPosition(position);
+					model.setBeginDate(beginDate);
+					model.setEndDate(endDate);
+					
+					positionHistoryList.add(model);
+				}
+				
+				return positionHistoryList;
+			}
+			//con.close();
 		}catch(SQLException sql){
 			sql.printStackTrace();
 		}
@@ -380,7 +427,7 @@ public class ListServiceImpl extends RemoteServiceServlet implements ListService
 		con = DBConnection.getConnection();
 
 		try{
-			prstmt = (PreparedStatement) con.prepareStatement("select am.id,modules.name,modules.expire_date from approve_modules as am, modules where am.church_id = ? and am.module_id = modules.id and am.status = 'A'");
+			prstmt = (PreparedStatement) con.prepareStatement("select am.id,m.name,m.expire_date from approve_modules as am join modules m on m.id = am.module_id where am.church_id = ? and am.status = 'A'");
 			prstmt.setInt(1, churchId);
 
 			ResultSet results = prstmt.executeQuery();
@@ -411,7 +458,7 @@ public class ListServiceImpl extends RemoteServiceServlet implements ListService
 		con = DBConnection.getConnection();
 
 		try{
-			prstmt = (PreparedStatement) con.prepareStatement("select em.id,modules.name,modules.expire_date from entry_modules as em, modules where em.church_id = ? and em.module_id = modules.id and em.status = 'A'");
+			prstmt = (PreparedStatement) con.prepareStatement("select em.id,m.name,m.expire_date from entry_modules as em join modules m on m.id = em.module_id where em.church_id = ? and em.status = 'A'");
 			prstmt.setInt(1, churchId);
 
 			ResultSet results = prstmt.executeQuery();
@@ -442,7 +489,7 @@ public class ListServiceImpl extends RemoteServiceServlet implements ListService
 		con = DBConnection.getConnection();
 
 		try{
-			prstmt = (PreparedStatement) con.prepareStatement("select classes.leader_id, members.fname, members.lname from members, classes where classes.church_id = ? and classes.leader_id = members.id and classes.status = 'A'");
+			prstmt = (PreparedStatement) con.prepareStatement("select c.leader_id, m.fname, m.lname from members m join classes c on c.leader_id = m.id where c.church_id = ? and c.status = 'A'");
 			prstmt.setInt(1, churchId);
 
 			ResultSet results = prstmt.executeQuery();
@@ -502,7 +549,7 @@ public class ListServiceImpl extends RemoteServiceServlet implements ListService
 		con = DBConnection.getConnection();
 
 		try{
-			prstmt = (PreparedStatement) con.prepareStatement("select mem.id,mem.fname,mem.lname,mem.can_view_payments,mem.avatar,mem.approved_by,mem.entry_modules,mem.created_by,mem.email,mem.dob,mem.msisdn,mem.tithes,mem.modified_by,mem.modified_ts,mem.organisations,date(mem.created_ts) as created_ts,mem.occupation,mem.address,mem.employer,mem.gender,mem.approve_modules,mem.class_id,mem.billing_id,mem.church_id,mem.is_admin,mem.can_sms,mem.region,mem.nationality,mem.kin,mem.kin_msisdn,mem.relation_status,mem.spouse,mem.hometown,mem.baptism_date,mem.baptism_location,mem.baptism_minister,mem.previous_church,mem.edu_level from members as mem where mem.church_id = ? and mem.status = ? order by mem.fname asc");
+			prstmt = (PreparedStatement) con.prepareStatement("select mem.id,mem.fname,mem.lname,mem.mname,mem.can_view_payments,mem.avatar,mem.approved_by,mem.entry_modules,mem.created_by,mem.email,mem.dob,mem.msisdn,mem.tithes,mem.modified_by,mem.modified_ts,mem.organisations,date(mem.created_ts) as created_ts,mem.occupation,mem.address,mem.employer,mem.gender,mem.approve_modules,mem.class_id,mem.billing_id,mem.church_id,mem.is_admin,mem.can_sms,mem.region,mem.nationality,mem.kin,mem.kin_msisdn,mem.relation_status,mem.spouse,mem.hometown,mem.baptism_date,mem.baptism_location,mem.baptism_minister,mem.previous_church,mem.edu_level from members as mem where mem.church_id = ? and mem.status = ? order by mem.fname asc");
 			prstmt.setInt(1, churchId);
 			prstmt.setString(2, status);
 
@@ -548,6 +595,7 @@ public class ListServiceImpl extends RemoteServiceServlet implements ListService
 					String baptismMinister = results.getString("baptism_minister");
 					String previousChurch = results.getString("previous_church");
 					String level = results.getString("edu_level");
+					String mname = results.getString("mname");
 
 					MemberModel member = new MemberModel();
 					member.setId(id);
@@ -588,6 +636,10 @@ public class ListServiceImpl extends RemoteServiceServlet implements ListService
 					member.setNameOfMinister(baptismMinister);
 					member.setPreviousChurch(previousChurch);
 					member.seteLevel(level);
+					member.setMiddleName(mname);
+					
+					//Grab all positions held
+					member.setHistoryList(getAllPositions(id));
 
 					members.add(member);
 				}
@@ -1425,9 +1477,10 @@ public class ListServiceImpl extends RemoteServiceServlet implements ListService
 		PreparedStatement prstmt = null;
 		con = DBConnection.getConnection();
 		try{
-			prstmt = (PreparedStatement) con.prepareStatement("select id,email from members where email = ? and church_id = ?");
+			prstmt = (PreparedStatement) con.prepareStatement("select id,email from members where email = ? and church_id = ? and status = ?");
 			prstmt.setString(1, email);
 			prstmt.setInt(2, churchId);
+			prstmt.setString(3, "A");
 			ResultSet results = prstmt.executeQuery();
 			if(results != null){
 				while(results.next()){
@@ -1474,7 +1527,7 @@ public class ListServiceImpl extends RemoteServiceServlet implements ListService
 		con = DBConnection.getConnection();
 
 		try{
-			prstmt = (PreparedStatement) con.prepareStatement("select mem.prefs,mem.commence_year,mem.id,mem.can_view_payments,mem.fname,mem.lname,mem.avatar,mem.approved_by,mem.entry_modules,mem.created_by,mem.email,mem.dob,mem.msisdn,mem.tithes,mem.modified_by,mem.modified_ts,mem.organisations,date(mem.created_ts) as created_ts,mem.occupation,mem.address,mem.employer,mem.gender,mem.approve_modules,mem.class_id,mem.billing_id,mem.church_id,mem.is_admin,mem.can_sms,mem.region,mem.nationality,mem.kin,mem.kin_msisdn,mem.relation_status,mem.spouse,mem.hometown,mem.baptism_date,mem.baptism_location,mem.baptism_minister,mem.previous_church,mem.edu_level from members as mem where mem.church_id = ? and mem.status = 'A' and mem.class_id = ? order by mem.fname asc");
+			prstmt = (PreparedStatement) con.prepareStatement("select mem.prefs,mem.commence_year,mem.id,mem.can_view_payments,mem.mname,mem.fname,mem.lname,mem.avatar,mem.approved_by,mem.entry_modules,mem.created_by,mem.email,mem.dob,mem.msisdn,mem.tithes,mem.modified_by,mem.modified_ts,mem.organisations,date(mem.created_ts) as created_ts,mem.occupation,mem.address,mem.employer,mem.gender,mem.approve_modules,mem.class_id,mem.billing_id,mem.church_id,mem.is_admin,mem.can_sms,mem.region,mem.nationality,mem.kin,mem.kin_msisdn,mem.relation_status,mem.spouse,mem.hometown,mem.baptism_date,mem.baptism_location,mem.baptism_minister,mem.previous_church,mem.edu_level from members as mem where mem.church_id = ? and mem.status = 'A' and mem.class_id = ? order by mem.fname asc");
 			prstmt.setInt(1, churchId);
 			prstmt.setInt(2, leaderId);
 
@@ -1522,6 +1575,7 @@ public class ListServiceImpl extends RemoteServiceServlet implements ListService
 					String baptismMinister = results.getString("baptism_minister");
 					String previousChurch = results.getString("previous_church");
 					String level = results.getString("edu_level");
+					String mname = results.getString("mname");
 
 					MemberModel member = new MemberModel();
 					member.setId(id);
@@ -1564,6 +1618,10 @@ public class ListServiceImpl extends RemoteServiceServlet implements ListService
 					member.setNameOfMinister(baptismMinister);
 					member.setPreviousChurch(previousChurch);
 					member.seteLevel(level);
+					member.setMiddleName(mname);
+					
+					//Grab all positions held
+					member.setHistoryList(getAllPositions(id));
 
 					members.add(member);
 				}
@@ -2200,7 +2258,7 @@ public class ListServiceImpl extends RemoteServiceServlet implements ListService
 		con = DBConnection.getConnection();
 
 		try{
-			prstmt = (PreparedStatement) con.prepareStatement("select pl.id as id,pl.created_by as created_by,mem.fname as fname,mem.lname as lname,mem.msisdn as msisdn,pl.created_ts as created_ts from power_leaders as pl,members as mem where pl.member_id = mem.id and pl.church_id = ? and pl.church_id = mem.church_id and pl.status = 'A'");
+			prstmt = (PreparedStatement) con.prepareStatement("select pl.id as id,pl.created_by as created_by,mem.fname as fname,mem.lname as lname,mem.msisdn as msisdn,pl.created_ts as created_ts from power_leaders as pl join members mem on mem.id = pl.member_id where pl.member_id = mem.id and pl.church_id = ? and pl.church_id = mem.church_id and pl.status = 'A'");
 			prstmt.setInt(1, churchId);
 
 			ResultSet results = prstmt.executeQuery();
@@ -2470,4 +2528,504 @@ public class ListServiceImpl extends RemoteServiceServlet implements ListService
 
 		return null;
 	}
+
+	@Override
+	public MemberModel getMemberWithEmail(String email, int churchId) {
+		PreparedStatement prstmt = null;
+		con = DBConnection.getConnection();
+		
+		try{
+			prstmt = (PreparedStatement) con.prepareStatement("select mem.prefs,mem.commence_year,mem.id,mem.can_view_payments,mem.mname,mem.fname,mem.lname,mem.avatar,mem.approved_by,mem.entry_modules,mem.created_by,mem.email,mem.dob,mem.msisdn,mem.tithes,mem.modified_by,mem.modified_ts,mem.organisations,date(mem.created_ts) as created_ts,mem.occupation,mem.address,mem.employer,mem.gender,mem.approve_modules,mem.class_id,mem.billing_id,mem.church_id,mem.is_admin,mem.can_sms,mem.region,mem.nationality,mem.kin,mem.kin_msisdn,mem.relation_status,mem.spouse,mem.hometown,mem.baptism_date,mem.baptism_location,mem.baptism_minister,mem.previous_church,mem.edu_level from members as mem where mem.email= ? and mem.church_id = ? and mem.status = 'A'");
+			prstmt.setString(1, email.trim().toLowerCase());
+			prstmt.setInt(2, churchId);
+
+			ResultSet results = prstmt.executeQuery();
+			if(results != null){
+				
+				while(results.next()){
+					int id = results.getInt("id");
+					String fname = results.getString("fname");
+					String lname = results.getString("lname");
+					//String email = results.getString("email");
+					String msisdn = results.getString("msisdn");
+					String avatar = results.getString("avatar");
+					String organisations = results.getString("organisations");
+					int classId = results.getInt("class_id");
+					int createdBy = results.getInt("created_by");
+					int billingId = results.getInt("billing_id");
+					String approveModules = results.getString("approve_modules");
+					String entryModules = results.getString("entry_modules");
+					String tithes = results.getString("tithes");
+					String occupation = results.getString("occupation");
+					String address = results.getString("address");
+					String gender = results.getString("gender");
+					String employer = results.getString("employer");
+					boolean isAdmin = results.getString("is_admin").equalsIgnoreCase("Y");
+					boolean canSMS = results.getString("can_sms").equalsIgnoreCase("Y");
+					String createdTs = results.getString("created_ts");
+					String dateOfBirth = results.getString("dob");
+					int modifiedBy = results.getInt("modified_by");
+					String modifiedTs = results.getString("modified_ts");
+					int approvedBy = results.getInt("approved_by");
+					boolean canViewPayments = results.getString("can_view_payments").equalsIgnoreCase("Y");
+					String commentYear = results.getString("commence_year");
+					String otherInfo = results.getString("prefs");
+					
+					String region = results.getString("region");
+					String nationality = results.getString("nationality");
+					String kin = results.getString("kin");
+					String kinMsisdn = results.getString("kin_msisdn");
+					String relationshipStatus = results.getString("relation_status");
+					String spouse = results.getString("spouse");
+					String hometown = results.getString("hometown");
+					String baptismDate = results.getString("baptism_date");
+					String baptismLocation = results.getString("baptism_location");
+					String baptismMinister = results.getString("baptism_minister");
+					String previousChurch = results.getString("previous_church");
+					String level = results.getString("edu_level");
+					String mname = results.getString("mname");
+					
+
+					MemberModel member = new MemberModel();
+					member.setId(id);
+					member.setCreatedBy(createdBy);
+					member.setFirstName(fname);
+					member.setLastName(lname);
+					member.setEmail(email);
+					member.setMsisdn(msisdn);
+					member.setOccupation(occupation);
+					member.setOrganisations(organisations);
+					member.setAddress(address);
+					member.setEmployer(employer);
+					member.setGender(gender);
+					member.setClassId(classId);
+					member.setTithes(tithes);
+					member.setAdmin(isAdmin);
+					member.setCanSMS(canSMS);
+					member.setBillingId(billingId);
+					member.setApproveModules(approveModules);
+					member.setEntryModules(entryModules);
+					member.setCreatedTs(createdTs);
+					member.setDateOfBirth(dateOfBirth);
+					member.setModifiedTs(modifiedTs);
+					member.setModifiedBy(modifiedBy);
+					member.setApprovedBy(approvedBy);
+					member.setAvatar(avatar);
+					member.setCanViewPayments(canViewPayments);
+					member.setDateOfCommencement(commentYear);
+					member.setOtherInfo(otherInfo);
+					
+					member.setRegion(region);
+					member.setNationality(nationality);
+					member.setKinName(kin);
+					member.setKinMsisdn(kinMsisdn);
+					member.setMaritalStatus(relationshipStatus);
+					member.setSpouseName(spouse);
+					member.setHometown(hometown);
+					member.setDateOfBaptism(baptismDate);
+					member.setPlaceOfBaptism(baptismLocation);
+					member.setNameOfMinister(baptismMinister);
+					member.setPreviousChurch(previousChurch);
+					member.seteLevel(level);
+					member.setMiddleName(mname);
+					
+					//Grab all positions
+					member.setHistoryList(getAllPositions(id));
+
+					return member;
+				}
+				
+			}
+			////con.close();
+		}catch(SQLException sql){
+			sql.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	@Override
+	public MemberModel getMemberWithMsisdn(String msisdn, int churchId) {
+		PreparedStatement prstmt = null;
+		con = DBConnection.getConnection();
+		
+		if(msisdn == null || msisdn.trim().isEmpty()){
+			return new MemberModel();
+		}
+		
+		if(!msisdn.contains("+")){
+			msisdn = "+"+msisdn;
+		}
+		
+		try{
+			prstmt = (PreparedStatement) con.prepareStatement("select mem.prefs,mem.commence_year,mem.id,mem.can_view_payments,mem.mname,mem.fname,mem.lname,mem.avatar,mem.approved_by,mem.entry_modules,mem.created_by,mem.email,mem.dob,mem.msisdn,mem.tithes,mem.modified_by,mem.modified_ts,mem.organisations,date(mem.created_ts) as created_ts,mem.occupation,mem.address,mem.employer,mem.gender,mem.approve_modules,mem.class_id,mem.billing_id,mem.church_id,mem.is_admin,mem.can_sms,mem.region,mem.nationality,mem.kin,mem.kin_msisdn,mem.relation_status,mem.spouse,mem.hometown,mem.baptism_date,mem.baptism_location,mem.baptism_minister,mem.previous_church,mem.edu_level from members as mem where mem.msisdn= ? and mem.church_id = ? and mem.status = 'A'");
+			prstmt.setString(1, msisdn.trim().toLowerCase());
+			prstmt.setInt(2, churchId);
+
+			ResultSet results = prstmt.executeQuery();
+			if(results != null){
+				
+				while(results.next()){
+					int id = results.getInt("id");
+					String fname = results.getString("fname");
+					String lname = results.getString("lname");
+					String email = results.getString("email");
+					//String msisdn = results.getString("msisdn");
+					String avatar = results.getString("avatar");
+					String organisations = results.getString("organisations");
+					int classId = results.getInt("class_id");
+					int createdBy = results.getInt("created_by");
+					int billingId = results.getInt("billing_id");
+					String approveModules = results.getString("approve_modules");
+					String entryModules = results.getString("entry_modules");
+					String tithes = results.getString("tithes");
+					String occupation = results.getString("occupation");
+					String address = results.getString("address");
+					String gender = results.getString("gender");
+					String employer = results.getString("employer");
+					boolean isAdmin = results.getString("is_admin").equalsIgnoreCase("Y");
+					boolean canSMS = results.getString("can_sms").equalsIgnoreCase("Y");
+					String createdTs = results.getString("created_ts");
+					String dateOfBirth = results.getString("dob");
+					int modifiedBy = results.getInt("modified_by");
+					String modifiedTs = results.getString("modified_ts");
+					int approvedBy = results.getInt("approved_by");
+					boolean canViewPayments = results.getString("can_view_payments").equalsIgnoreCase("Y");
+					String commentYear = results.getString("commence_year");
+					String otherInfo = results.getString("prefs");
+					
+					String region = results.getString("region");
+					String nationality = results.getString("nationality");
+					String kin = results.getString("kin");
+					String kinMsisdn = results.getString("kin_msisdn");
+					String relationshipStatus = results.getString("relation_status");
+					String spouse = results.getString("spouse");
+					String hometown = results.getString("hometown");
+					String baptismDate = results.getString("baptism_date");
+					String baptismLocation = results.getString("baptism_location");
+					String baptismMinister = results.getString("baptism_minister");
+					String previousChurch = results.getString("previous_church");
+					String level = results.getString("edu_level");
+					String mname = results.getString("mname");
+					
+
+					MemberModel member = new MemberModel();
+					member.setId(id);
+					member.setCreatedBy(createdBy);
+					member.setFirstName(fname);
+					member.setLastName(lname);
+					member.setEmail(email);
+					member.setMsisdn(msisdn);
+					member.setOccupation(occupation);
+					member.setOrganisations(organisations);
+					member.setAddress(address);
+					member.setEmployer(employer);
+					member.setGender(gender);
+					member.setClassId(classId);
+					member.setTithes(tithes);
+					member.setAdmin(isAdmin);
+					member.setCanSMS(canSMS);
+					member.setBillingId(billingId);
+					member.setApproveModules(approveModules);
+					member.setEntryModules(entryModules);
+					member.setCreatedTs(createdTs);
+					member.setDateOfBirth(dateOfBirth);
+					member.setModifiedTs(modifiedTs);
+					member.setModifiedBy(modifiedBy);
+					member.setApprovedBy(approvedBy);
+					member.setAvatar(avatar);
+					member.setCanViewPayments(canViewPayments);
+					member.setDateOfCommencement(commentYear);
+					member.setOtherInfo(otherInfo);
+					
+					member.setRegion(region);
+					member.setNationality(nationality);
+					member.setKinName(kin);
+					member.setKinMsisdn(kinMsisdn);
+					member.setMaritalStatus(relationshipStatus);
+					member.setSpouseName(spouse);
+					member.setHometown(hometown);
+					member.setDateOfBaptism(baptismDate);
+					member.setPlaceOfBaptism(baptismLocation);
+					member.setNameOfMinister(baptismMinister);
+					member.setPreviousChurch(previousChurch);
+					member.seteLevel(level);
+					member.setMiddleName(mname);
+					
+					//Grab all positions
+					member.setHistoryList(getAllPositions(id));
+
+					return member;
+				}
+				
+			}
+			////con.close();
+		}catch(SQLException sql){
+			sql.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	@Override
+	public MemberModel getMemberWithId(int id, int churchId) {
+		PreparedStatement prstmt = null;
+		con = DBConnection.getConnection();
+		
+		try{
+			prstmt = (PreparedStatement) con.prepareStatement("select mem.prefs,mem.commence_year,mem.id,mem.can_view_payments,mem.mname,mem.fname,mem.lname,mem.avatar,mem.approved_by,mem.entry_modules,mem.created_by,mem.email,mem.dob,mem.msisdn,mem.tithes,mem.modified_by,mem.modified_ts,mem.organisations,date(mem.created_ts) as created_ts,mem.occupation,mem.address,mem.employer,mem.gender,mem.approve_modules,mem.class_id,mem.billing_id,mem.church_id,mem.is_admin,mem.can_sms,mem.region,mem.nationality,mem.kin,mem.kin_msisdn,mem.relation_status,mem.spouse,mem.hometown,mem.baptism_date,mem.baptism_location,mem.baptism_minister,mem.previous_church,mem.edu_level from members as mem where mem.id= ? and mem.church_id = ? and mem.status = 'A'");
+			prstmt.setInt(1, id);
+			prstmt.setInt(2, churchId);
+
+			ResultSet results = prstmt.executeQuery();
+			if(results != null){
+				
+				while(results.next()){
+					//int id = results.getInt("id");
+					String fname = results.getString("fname");
+					String lname = results.getString("lname");
+					String email = results.getString("email");
+					String msisdn = results.getString("msisdn");
+					String avatar = results.getString("avatar");
+					String organisations = results.getString("organisations");
+					int classId = results.getInt("class_id");
+					int createdBy = results.getInt("created_by");
+					int billingId = results.getInt("billing_id");
+					String approveModules = results.getString("approve_modules");
+					String entryModules = results.getString("entry_modules");
+					String tithes = results.getString("tithes");
+					String occupation = results.getString("occupation");
+					String address = results.getString("address");
+					String gender = results.getString("gender");
+					String employer = results.getString("employer");
+					boolean isAdmin = results.getString("is_admin").equalsIgnoreCase("Y");
+					boolean canSMS = results.getString("can_sms").equalsIgnoreCase("Y");
+					String createdTs = results.getString("created_ts");
+					String dateOfBirth = results.getString("dob");
+					int modifiedBy = results.getInt("modified_by");
+					String modifiedTs = results.getString("modified_ts");
+					int approvedBy = results.getInt("approved_by");
+					boolean canViewPayments = results.getString("can_view_payments").equalsIgnoreCase("Y");
+					String commentYear = results.getString("commence_year");
+					String otherInfo = results.getString("prefs");
+					
+					String region = results.getString("region");
+					String nationality = results.getString("nationality");
+					String kin = results.getString("kin");
+					String kinMsisdn = results.getString("kin_msisdn");
+					String relationshipStatus = results.getString("relation_status");
+					String spouse = results.getString("spouse");
+					String hometown = results.getString("hometown");
+					String baptismDate = results.getString("baptism_date");
+					String baptismLocation = results.getString("baptism_location");
+					String baptismMinister = results.getString("baptism_minister");
+					String previousChurch = results.getString("previous_church");
+					String level = results.getString("edu_level");
+					String mname = results.getString("mname");
+					
+
+					MemberModel member = new MemberModel();
+					member.setId(id);
+					member.setCreatedBy(createdBy);
+					member.setFirstName(fname);
+					member.setLastName(lname);
+					member.setEmail(email);
+					member.setMsisdn(msisdn);
+					member.setOccupation(occupation);
+					member.setOrganisations(organisations);
+					member.setAddress(address);
+					member.setEmployer(employer);
+					member.setGender(gender);
+					member.setClassId(classId);
+					member.setTithes(tithes);
+					member.setAdmin(isAdmin);
+					member.setCanSMS(canSMS);
+					member.setBillingId(billingId);
+					member.setApproveModules(approveModules);
+					member.setEntryModules(entryModules);
+					member.setCreatedTs(createdTs);
+					member.setDateOfBirth(dateOfBirth);
+					member.setModifiedTs(modifiedTs);
+					member.setModifiedBy(modifiedBy);
+					member.setApprovedBy(approvedBy);
+					member.setAvatar(avatar);
+					member.setCanViewPayments(canViewPayments);
+					member.setDateOfCommencement(commentYear);
+					member.setOtherInfo(otherInfo);
+					
+					member.setRegion(region);
+					member.setNationality(nationality);
+					member.setKinName(kin);
+					member.setKinMsisdn(kinMsisdn);
+					member.setMaritalStatus(relationshipStatus);
+					member.setSpouseName(spouse);
+					member.setHometown(hometown);
+					member.setDateOfBaptism(baptismDate);
+					member.setPlaceOfBaptism(baptismLocation);
+					member.setNameOfMinister(baptismMinister);
+					member.setPreviousChurch(previousChurch);
+					member.seteLevel(level);
+					member.setMiddleName(mname);
+					
+					//Grab all positions
+					member.setHistoryList(getAllPositions(id));
+
+					return member;
+				}
+				
+			}
+			////con.close();
+		}catch(SQLException sql){
+			sql.printStackTrace();
+		}
+		
+		return null;
+	}
+
+	@Override
+	public ArrayList<MemberModel> getMemberWithName(String name, int churchId) {
+		PreparedStatement prstmt = null;
+		con = DBConnection.getConnection();
+		
+		try{
+			prstmt = (PreparedStatement) con.prepareStatement("select mem.prefs,mem.commence_year,mem.id,mem.can_view_payments,mem.mname,mem.fname,mem.lname,mem.avatar,mem.approved_by,mem.entry_modules,mem.created_by,mem.email,mem.dob,mem.msisdn,mem.tithes,mem.modified_by,mem.modified_ts,mem.organisations,date(mem.created_ts) as created_ts,mem.occupation,mem.address,mem.employer,mem.gender,mem.approve_modules,mem.class_id,mem.billing_id,mem.church_id,mem.is_admin,mem.can_sms,mem.region,mem.nationality,mem.kin,mem.kin_msisdn,mem.relation_status,mem.spouse,mem.hometown,mem.baptism_date,mem.baptism_location,mem.baptism_minister,mem.previous_church,mem.edu_level from members as mem where (mem.fname like ? or mem.lname like ?) and mem.church_id = ? and mem.status = 'A'");
+			prstmt.setString(1, "%"+name+"%");
+			prstmt.setString(2, "%"+name+"%");
+			prstmt.setInt(3, churchId);
+
+			ResultSet results = prstmt.executeQuery();
+			if(results != null){
+				ArrayList<MemberModel> memberList = new ArrayList<MemberModel>();
+				while(results.next()){
+					int id = results.getInt("id");
+					String fname = results.getString("fname");
+					String lname = results.getString("lname");
+					String email = results.getString("email");
+					String msisdn = results.getString("msisdn");
+					String avatar = results.getString("avatar");
+					String organisations = results.getString("organisations");
+					int classId = results.getInt("class_id");
+					int createdBy = results.getInt("created_by");
+					int billingId = results.getInt("billing_id");
+					String approveModules = results.getString("approve_modules");
+					String entryModules = results.getString("entry_modules");
+					String tithes = results.getString("tithes");
+					String occupation = results.getString("occupation");
+					String address = results.getString("address");
+					String gender = results.getString("gender");
+					String employer = results.getString("employer");
+					boolean isAdmin = results.getString("is_admin").equalsIgnoreCase("Y");
+					boolean canSMS = results.getString("can_sms").equalsIgnoreCase("Y");
+					String createdTs = results.getString("created_ts");
+					String dateOfBirth = results.getString("dob");
+					int modifiedBy = results.getInt("modified_by");
+					String modifiedTs = results.getString("modified_ts");
+					int approvedBy = results.getInt("approved_by");
+					boolean canViewPayments = results.getString("can_view_payments").equalsIgnoreCase("Y");
+					String commentYear = results.getString("commence_year");
+					String otherInfo = results.getString("prefs");
+					
+					String region = results.getString("region");
+					String nationality = results.getString("nationality");
+					String kin = results.getString("kin");
+					String kinMsisdn = results.getString("kin_msisdn");
+					String relationshipStatus = results.getString("relation_status");
+					String spouse = results.getString("spouse");
+					String hometown = results.getString("hometown");
+					String baptismDate = results.getString("baptism_date");
+					String baptismLocation = results.getString("baptism_location");
+					String baptismMinister = results.getString("baptism_minister");
+					String previousChurch = results.getString("previous_church");
+					String level = results.getString("edu_level");
+					String mname = results.getString("mname");
+					
+
+					MemberModel member = new MemberModel();
+					member.setId(id);
+					member.setCreatedBy(createdBy);
+					member.setFirstName(fname);
+					member.setLastName(lname);
+					member.setEmail(email);
+					member.setMsisdn(msisdn);
+					member.setOccupation(occupation);
+					member.setOrganisations(organisations);
+					member.setAddress(address);
+					member.setEmployer(employer);
+					member.setGender(gender);
+					member.setClassId(classId);
+					member.setTithes(tithes);
+					member.setAdmin(isAdmin);
+					member.setCanSMS(canSMS);
+					member.setBillingId(billingId);
+					member.setApproveModules(approveModules);
+					member.setEntryModules(entryModules);
+					member.setCreatedTs(createdTs);
+					member.setDateOfBirth(dateOfBirth);
+					member.setModifiedTs(modifiedTs);
+					member.setModifiedBy(modifiedBy);
+					member.setApprovedBy(approvedBy);
+					member.setAvatar(avatar);
+					member.setCanViewPayments(canViewPayments);
+					member.setDateOfCommencement(commentYear);
+					member.setOtherInfo(otherInfo);
+					
+					member.setRegion(region);
+					member.setNationality(nationality);
+					member.setKinName(kin);
+					member.setKinMsisdn(kinMsisdn);
+					member.setMaritalStatus(relationshipStatus);
+					member.setSpouseName(spouse);
+					member.setHometown(hometown);
+					member.setDateOfBaptism(baptismDate);
+					member.setPlaceOfBaptism(baptismLocation);
+					member.setNameOfMinister(baptismMinister);
+					member.setPreviousChurch(previousChurch);
+					member.seteLevel(level);
+					member.setMiddleName(mname);
+					
+					//Grab all positions
+					member.setHistoryList(getAllPositions(id));
+
+					memberList.add(member);
+					//return member;
+				}
+				return memberList;
+				
+			}
+			////con.close();
+		}catch(SQLException sql){
+			sql.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+//	private String getLeaderName(int leaderId) {
+//		PreparedStatement prstmt = null;
+//		con = DBConnection.getConnection();
+//
+//		try{
+//			prstmt = (PreparedStatement) con.prepareStatement("select id,name,code from regions where status = ?");
+//			prstmt.setString(1, "A");
+//
+//			ResultSet results = prstmt.executeQuery();
+//			if(results != null){
+//				HashMap<String, String> regionsMap = new HashMap<String, String>();
+//				while(results.next()){
+//					//int id = results.getInt("id");
+//					String name = results.getString("name");
+//					String code = results.getString("code");
+//					
+//					regionsMap.put(name, code);
+//				}
+//				
+//				return regionsMap;
+//			}
+//			////con.close();
+//		}catch(SQLException sql){
+//			sql.printStackTrace();
+//		}
+//
+//		return null;
+//	}
 }

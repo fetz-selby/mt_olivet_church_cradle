@@ -55,9 +55,6 @@ public class ReviewStage extends Composite implements IsWizardable<MemberModel>{
 //			});
 //		}
 		
-		if(model.getAvatar() != null){
-			img.setUrl(model.getAvatar());
-		}
 		
 		nameField.setInnerText(Utils.getTruncatedText(model.getFirstName()+" "+model.getLastName(), 16));
 		msisdnField.setInnerText(model.getMsisdn());
@@ -65,7 +62,13 @@ public class ReviewStage extends Composite implements IsWizardable<MemberModel>{
 		leaderField.setInnerText(Utils.getClassLeader(model.getClassId()));
 		orgField.setInnerText(Utils.getTruncatedText(Utils.getOrganisations(",", model.getOrganisations()), AppConstants.MEMBER_ORGANISATION_LIMIT));
 		dobField.setInnerText(model.getDateOfBirth());
-
+		
+		if(model.getAvatar() != null && !model.getAvatar().trim().isEmpty()){
+			img.setUrl(AppConstants.PHOTO_URL+model.getAvatar());
+		}else{
+			img.setUrl(AppConstants.NO_IMAGE);
+		}
+		
 		if(model.isUpdate()){
 			deleteMember = new CustomCheckBox("delete", model.getId() != 0 ? model.getId()+"":"0");
 			deleteMember.setCustomCheckBoxEventHandler(new CustomCheckBoxEventHandler() {
@@ -112,7 +115,7 @@ public class ReviewStage extends Composite implements IsWizardable<MemberModel>{
 
 	@Override
 	public void back() {
-		wizardHandler.onValidateComplete(WizardStage.SIX, model);
+		wizardHandler.onValidateComplete(WizardStage.SIX_SUB1, model);
 	}
 
 }

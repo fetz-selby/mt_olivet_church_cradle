@@ -3,7 +3,7 @@
 	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.beta.rsatech.churchcradle.client.widgets">
 	<ui:style>
 	.main {
-		width: 280px;
+		width:324px;
 	}
 	</ui:style>
 	<g:HTMLPanel styleName="col-sm-6 {style.main}">

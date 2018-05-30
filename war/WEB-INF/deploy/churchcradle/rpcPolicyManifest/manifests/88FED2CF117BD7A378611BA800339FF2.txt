@@ -1,2 +1,0 @@
-serviceClass: com.beta.rsatech.churchcradle.client.UpdateService
-path: 5696AFA954D402FC7CB41AA86A11CAE3.gwt.rpc

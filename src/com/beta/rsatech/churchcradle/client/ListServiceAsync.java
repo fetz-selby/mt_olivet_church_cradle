@@ -158,4 +158,14 @@ public interface ListServiceAsync {
 	void getEducationalList(AsyncCallback<HashMap<String, String>> callback);
 
 	void getRegionsList(AsyncCallback<HashMap<String, String>> callback);
+
+	void getMemberWithEmail(String email, int churchId, AsyncCallback<MemberModel> callback);
+
+	void getMemberWithMsisdn(String msisdn, int churchId, AsyncCallback<MemberModel> callback);
+
+	void getMemberWithId(int id, int churchId,
+			AsyncCallback<MemberModel> callback);
+
+	void getMemberWithName(String name, int churchId,
+			AsyncCallback<ArrayList<MemberModel>> callback);
 }

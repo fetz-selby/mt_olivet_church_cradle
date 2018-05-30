@@ -91,4 +91,10 @@ public interface ListService extends RemoteService{
 	
 	HashMap<String, String> getEducationalList();
 	HashMap<String, String> getRegionsList();
+	
+	MemberModel getMemberWithEmail(String email, int churchId);
+	MemberModel getMemberWithMsisdn(String msisdn, int churchId);
+	MemberModel getMemberWithId(int id, int churchId);
+	ArrayList<MemberModel> getMemberWithName(String name, int churchId);
+	
 }

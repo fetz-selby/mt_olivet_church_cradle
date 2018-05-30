@@ -20,6 +20,7 @@ import com.beta.rsatech.churchcradle.shared.GroupModel;
 import com.beta.rsatech.churchcradle.shared.MarriageModel;
 import com.beta.rsatech.churchcradle.shared.MemberModel;
 import com.beta.rsatech.churchcradle.shared.OfferingModel;
+import com.beta.rsatech.churchcradle.shared.PositionHistoryModel;
 import com.beta.rsatech.churchcradle.shared.PowerLeaderModel;
 import com.beta.rsatech.churchcradle.shared.SMSModel;
 import com.beta.rsatech.churchcradle.shared.SpecialOfferingModel;
@@ -35,7 +36,6 @@ public class AddServiceImpl extends RemoteServiceServlet implements AddService{
 		PreparedStatement prstmt = null;
 		con = DBConnection.getConnection();
 		
-
 		try{
 			int accountId = getAccountId(memberId, model.getChurchId());
 			if(accountId > 0){
@@ -152,7 +152,7 @@ public class AddServiceImpl extends RemoteServiceServlet implements AddService{
 				
 				con = DBConnection.getConnection();
 				
-				prstmt = (PreparedStatement) con.prepareStatement("insert into members (fname,lname,email,msisdn,avatar,password,church_id,billing_id,is_admin,can_sms,created_ts,approved_by,modified_by,created_by,approve_modules,class_id,organisations,tithes,occupation,address,dob,gender,prefs,employer,status,entry_modules,can_view_payments,commence_year,nationality,region,spouse,hometown,kin,kin_msisdn,baptism_date,baptism_location,previous_church,baptism_minister,relation_status,edu_level,hometown) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ");
+				prstmt = (PreparedStatement) con.prepareStatement("insert into members (fname,lname,email,msisdn,avatar,password,church_id,billing_id,is_admin,can_sms,created_ts,approved_by,modified_by,created_by,approve_modules,class_id,organisations,tithes,occupation,address,dob,gender,prefs,employer,status,entry_modules,can_view_payments,commence_year,nationality,region,spouse,hometown,kin,kin_msisdn,baptism_date,baptism_location,previous_church,baptism_minister,relation_status,edu_level,mname) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ", Statement.RETURN_GENERATED_KEYS);
 				prstmt.setString(1, Utils.getCapitalizedWord(model.getFirstName()));
 				prstmt.setString(2, Utils.getCapitalizedWord(model.getLastName()));
 				prstmt.setString(3, model.getEmail() == null ? "" : model.getEmail());
@@ -195,10 +195,20 @@ public class AddServiceImpl extends RemoteServiceServlet implements AddService{
 				prstmt.setString(38, model.getNameOfMinister());
 				prstmt.setString(39, model.getMaritalStatus());				
 				prstmt.setString(40, model.geteLevel());				
-				prstmt.setString(41, model.getHometown());				
+				prstmt.setString(41, model.getMiddleName());				
 
 				int success = prstmt.executeUpdate();
+				
 				if(success > 0){
+					ResultSet tmpResultSet = prstmt.getGeneratedKeys();
+					while(tmpResultSet.next()){
+						for(PositionHistoryModel positionModel : model.getHistoryList()){
+							if(positionModel.getName() != null && !positionModel.getName().trim().isEmpty()){
+								addServeHistory(positionModel, memberId, tmpResultSet.getInt(1), model.getChurchId());
+							}
+						}
+					}
+
 					//con.close();
 					return success;
 				}
@@ -499,6 +509,32 @@ public class AddServiceImpl extends RemoteServiceServlet implements AddService{
 			prstmt.setInt(2, userId);
 			prstmt.setInt(3, model.getChurchId());
 			prstmt.setString(4, "A");
+
+			int success = prstmt.executeUpdate();
+			if(success > 0){
+				//con.close();
+				return success;
+			}
+		}catch(SQLException sql){
+			sql.printStackTrace();
+		}
+		return 0;
+	}
+	
+	private int addServeHistory(PositionHistoryModel model, int userId, int memberId, int churchId){
+		PreparedStatement prstmt = null;
+		con = DBConnection.getConnection();
+
+		try{
+			prstmt = (PreparedStatement) con.prepareStatement("insert into serve_history (member_id,created_by,church_id,description,position,begin_date,end_date,status) values (?,?,?,?,?,?,?,?) ");
+			prstmt.setInt(1, memberId);
+			prstmt.setInt(2, userId);
+			prstmt.setInt(3, churchId);
+			prstmt.setString(4, model.getName());
+			prstmt.setString(5, model.getPosition());
+			prstmt.setString(6, model.getBeginDate());
+			prstmt.setString(7, model.getEndDate());
+			prstmt.setString(8, "A");
 
 			int success = prstmt.executeUpdate();
 			if(success > 0){

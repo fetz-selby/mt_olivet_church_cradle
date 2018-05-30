@@ -8,7 +8,6 @@ import com.google.appengine.api.utils.SystemProperty;
 
 public class DBConnection {
 	private static Connection con;
-	private static final String MYSQL_DRIVER = "jdbc:mysql://";
 	private static DBConnection dbc = new DBConnection();
 	private static int counter;
 
@@ -33,8 +32,6 @@ public class DBConnection {
 	}
 
 	private void establishConnection(){
-		
-		
 		String url = "";
 
 		try {
@@ -45,15 +42,15 @@ public class DBConnection {
 				Class.forName("com.mysql.jdbc.Driver");
 
 				//url = "jdbc:google:mysql://cradleapps:alpha-db/olivet_church_cradle_gl?user=root&autoReconnect=true";
-				url = "jdbc:mysql://127.0.0.1:3306/church_cradle_web_google?user=root&autoReconnect=true";
-				//url = "jdbc:mysql://127.0.0.1:3306/church_cradle_web_google?user=root&password=root&autoReconnect=true";
+				url = "jdbc:mysql://127.0.0.1:3306/church_cradle_web_google?user=root&password=root&autoReconnect=true";
+				//url = "jdbc:mysql://127.0.0.1:3306/church_cradle_web_google?user=root&autoReconnect=true";
 
 			} else {
 				// Local MySQL instance to use during development.
 				Class.forName("com.mysql.jdbc.Driver");
 				//url = "jdbc:mysql://173.194.250.73:3306/olivet_church_cradle_gl?user=root&autoReconnect=true";
-				url = "jdbc:mysql://127.0.0.1:3306/church_cradle_web_google?user=root&autoReconnect=true";
-				//url = "jdbc:mysql://127.0.0.1:3306/church_cradle_web_google?user=root&password=root&autoReconnect=true";
+				url = "jdbc:mysql://127.0.0.1:3306/church_cradle_web_google?user=root&password=root&autoReconnect=true";
+				//url = "jdbc:mysql://127.0.0.1:3306/church_cradle_web_google?user=root&autoReconnect=true";
 
 			}
 			con = (Connection)DriverManager.getConnection(url);

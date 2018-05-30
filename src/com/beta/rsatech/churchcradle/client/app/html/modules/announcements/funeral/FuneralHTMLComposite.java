@@ -39,6 +39,11 @@ public class FuneralHTMLComposite extends UIObject {
 		smallDate.setInnerText(model.getDate());
 		smallTime.setInnerText(model.getTime());
 		
+		if(model.getAvatar() != null && !model.getAvatar().trim().isEmpty()){
+			avatar.setSrc(AppConstants.PHOTO_URL+model.getAvatar());
+		}else{
+			avatar.setSrc(AppConstants.NO_IMAGE);
+		}
 		//avatar.setSrc(model.getAvatar() == null || model.getAvatar().trim().isEmpty() ? AppConstants.NO_IMAGE : model.getAvatar());
 		
 		if(model.getAvatar() != null && !model.getAvatar().trim().isEmpty()){

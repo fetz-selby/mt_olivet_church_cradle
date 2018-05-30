@@ -419,7 +419,7 @@ public class UpdateServiceImpl extends RemoteServiceServlet implements UpdateSer
 		try{
 			
 
-			prstmt = (PreparedStatement) con.prepareStatement("update members set status = 'A', fname = ?, lname = ?, is_admin = ?, can_sms = ?, modified_by = ?, entry_modules = ?, class_id = ?, approve_modules = ?, organisations = ?, occupation = ?, address = ?, dob = ?, gender = ?, employer = ?, avatar = ?, can_view_payments = ?, prefs = ? where id = ?");
+			prstmt = (PreparedStatement) con.prepareStatement("update members set status = 'A', fname = ?, lname = ?, is_admin = ?, can_sms = ?, modified_by = ?, entry_modules = ?, class_id = ?, approve_modules = ?, organisations = ?, occupation = ?, address = ?, dob = ?, gender = ?, employer = ?, avatar = ?, can_view_payments = ?, prefs = ?, nationality = ?, region = ?, kin_msisdn = ?, kin = ?, relation_status = ?, spouse = ?, hometown = ?, baptism_date = ?, baptism_location = ?, baptism_minister = ?, previous_church = ?, edu_level = ? where id = ?");
 			prstmt.setString(1, model.getFirstName());
 			prstmt.setString(2, model.getLastName());
 			prstmt.setString(3, model.isAdmin()?"Y":"N");
@@ -437,8 +437,22 @@ public class UpdateServiceImpl extends RemoteServiceServlet implements UpdateSer
 			prstmt.setString(15, model.getAvatar());
 			prstmt.setString(16, model.isCanViewPayments()?"Y":"N");
 			prstmt.setString(17, model.getOtherInfo());
+			
+			prstmt.setString(18, model.getNationality());
+			prstmt.setString(19, model.getRegion());
+			prstmt.setString(20, model.getKinMsisdn());
+			prstmt.setString(21, model.getKinName());
+			prstmt.setString(22, model.getMaritalStatus());
+			prstmt.setString(23, model.getSpouseName());
+			prstmt.setString(24, model.getHometown());
+			prstmt.setString(25, model.getDateOfBaptism());
+			prstmt.setString(26, model.getPlaceOfBaptism());
+			prstmt.setString(27, model.getNameOfMinister());
+			prstmt.setString(28, model.getPreviousChurch());
+			prstmt.setString(29, model.geteLevel());
+			
 
-			prstmt.setInt(18, model.getId());
+			prstmt.setInt(30, model.getId());
 
 			int success = prstmt.executeUpdate();
 			System.out.println("[Member update] success is "+success);
@@ -760,7 +774,6 @@ public class UpdateServiceImpl extends RemoteServiceServlet implements UpdateSer
 		con = DBConnection.getConnection();
 
 		try{
-			
 
 			prstmt = (PreparedStatement) con.prepareStatement("update members set password = ? where id = ? and status = 'A'");
 			prstmt.setString(1, Utils.getSHA256(password));

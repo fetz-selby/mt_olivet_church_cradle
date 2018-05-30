@@ -96,7 +96,9 @@ public class StageTwo extends Composite implements IsWizardable<MemberModel>{
 		HashMap<String, String> regMap = GlobalResources.getInstance().getRegionsMap();
 		regionsMap = new HashMap<String, Integer>();
 		
-		int index = 0;
+		int index = 1;
+		//Init region
+		regionsField.addItem("-- Select Region --", "0");
 		for(String key : regMap.keySet()){
 			regionsField.addItem(key, regMap.get(key));
 			regionsMap.put(regMap.get(key), index);
@@ -169,7 +171,7 @@ public class StageTwo extends Composite implements IsWizardable<MemberModel>{
 			return;
 		}
 		
-		if(hometownField.getText().trim().length() < 5){
+		if(hometownField.getText().trim().length() < 3){
 			doPublishError("Please specify hometown");
 			return;
 		}
@@ -195,7 +197,7 @@ public class StageTwo extends Composite implements IsWizardable<MemberModel>{
 		model.seteLevel(eLevelField.getValue(eLevelField.getSelectedIndex()));
 		model.setRegion(regionsField.getValue(regionsField.getSelectedIndex()));
 		model.setNationality(nationalityField.getText().trim().isEmpty()?AppConstants.DEFAULT_NATIONALITY:nationalityField.getText().trim());
-		model.setNationality(hometownField.getText().trim());
+		model.setHometown(hometownField.getText().trim());
 	}
 	
 	private void doPublishError(String message){

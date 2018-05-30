@@ -7,7 +7,6 @@ import java.util.TreeSet;
 import com.beta.rsatech.churchcradle.client.resources.GlobalResources;
 import com.beta.rsatech.churchcradle.shared.AppConstants;
 import com.beta.rsatech.churchcradle.shared.BlobstoreModel;
-import com.google.apphosting.utils.glob.Glob;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -131,7 +130,7 @@ public class Utils {
 	}
 	
 	public static boolean isEmailValidFormat(String email){
-		if(email.trim().matches("^([a-z0-9_\\.-]+)@([\\d\\p{L}\\a-z\\.-]+)\\.([a-z\\.]{2,6})$")){
+		if(email.trim().matches("^([a-z0-9_\\.-]+)@([a-z0-9]+)([.][a-z]+)+$")){
 			return true;
 		}
 		return false;
@@ -475,6 +474,24 @@ public class Utils {
 			return true;
 		}
 		
+		return false;
+	}
+	
+	public static boolean isName(String name){
+		if(name != null){
+			if(name.contains("@")){
+				return false;
+			}
+			
+			for(int i = 0; i < name.length(); i++){
+				char ch = name.charAt(i);
+				if(!(Character.isLetter(ch) || Character.isSpace(ch))){
+					return false;
+				}
+			}
+			
+			return true;
+		}
 		return false;
 	}
 

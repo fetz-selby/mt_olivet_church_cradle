@@ -92,11 +92,11 @@ public class StageSixSub1 extends Composite implements IsWizardable<MemberModel>
 		next();
 	}
 	
-	private void doPublishError(String message){
-		if(wizardHandler != null){
-			wizardHandler.onError(message);
-		}
-	}
+//	private void doPublishError(String message){
+//		if(wizardHandler != null){
+//			wizardHandler.onError(message);
+//		}
+//	}
 	
 	@Override
 	public void validateAndReturn() {

@@ -1,0 +1,2 @@
+serviceClass: com.beta.rsatech.churchcradle.client.ListService
+path: 4AF3D379A9DC2079CC551EE42FB47DF3.gwt.rpc

@@ -54,6 +54,7 @@ public class StageThree extends Composite implements IsWizardable<MemberModel>{
 			leaderId = model.getClassId();
 			leader = GlobalResources.getInstance().getClassesLeadersMap().get(model.getClassId());
 			leaderSearch.getElement().setAttribute("placeholder", leader);
+			//leaderSearch.setText(model.get)
 		}
 		
 	}

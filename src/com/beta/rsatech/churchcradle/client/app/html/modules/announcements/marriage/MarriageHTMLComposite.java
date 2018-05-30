@@ -1,10 +1,8 @@
 package com.beta.rsatech.churchcradle.client.app.html.modules.announcements.marriage;
 
 import com.beta.rsatech.churchcradle.client.elements.SmallElement;
-import com.beta.rsatech.churchcradle.client.utils.GeneralEventHandler;
 import com.beta.rsatech.churchcradle.client.utils.Utils;
 import com.beta.rsatech.churchcradle.shared.AppConstants;
-import com.beta.rsatech.churchcradle.shared.BlobstoreModel;
 import com.beta.rsatech.churchcradle.shared.MarriageModel;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.DivElement;
@@ -43,36 +41,48 @@ public class MarriageHTMLComposite extends UIObject {
 		smallTime.setInnerText(model.getTime());
 		
 		if(model.getmAvatar() != null && !model.getmAvatar().trim().isEmpty()){
-			Utils.retrieveFromBlobstore(model.getmAvatar(), new GeneralEventHandler<BlobstoreModel>() {
-				
-				@Override
-				public void onSuccess(BlobstoreModel t) {
-					mAvatar.setSrc(t.getUrl());
-				}
-				
-				@Override
-				public void onError() {
-					// TODO Auto-generated method stub
-					
-				}
-			});
+			mAvatar.setSrc(AppConstants.PHOTO_URL+model.getmAvatar());
+		}else{
+			mAvatar.setSrc(AppConstants.NO_IMAGE);
 		}
 		
 		if(model.getfAvatar() != null && !model.getfAvatar().trim().isEmpty()){
-			Utils.retrieveFromBlobstore(model.getfAvatar(), new GeneralEventHandler<BlobstoreModel>() {
-				
-				@Override
-				public void onSuccess(BlobstoreModel t) {
-					fAvatar.setSrc(t.getUrl());
-				}
-				
-				@Override
-				public void onError() {
-					// TODO Auto-generated method stub
-					
-				}
-			});
+			fAvatar.setSrc(AppConstants.PHOTO_URL+model.getfAvatar());
+		}else{
+			fAvatar.setSrc(AppConstants.NO_IMAGE);
 		}
+		
+//		if(model.getmAvatar() != null && !model.getmAvatar().trim().isEmpty()){
+//			Utils.retrieveFromBlobstore(model.getmAvatar(), new GeneralEventHandler<BlobstoreModel>() {
+//				
+//				@Override
+//				public void onSuccess(BlobstoreModel t) {
+//					mAvatar.setSrc(t.getUrl());
+//				}
+//				
+//				@Override
+//				public void onError() {
+//					// TODO Auto-generated method stub
+//					
+//				}
+//			});
+//		}
+//		
+//		if(model.getfAvatar() != null && !model.getfAvatar().trim().isEmpty()){
+//			Utils.retrieveFromBlobstore(model.getfAvatar(), new GeneralEventHandler<BlobstoreModel>() {
+//				
+//				@Override
+//				public void onSuccess(BlobstoreModel t) {
+//					fAvatar.setSrc(t.getUrl());
+//				}
+//				
+//				@Override
+//				public void onError() {
+//					// TODO Auto-generated method stub
+//					
+//				}
+//			});
+//		}
 		
 		
 		

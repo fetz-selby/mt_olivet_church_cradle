@@ -207,6 +207,7 @@ public interface AppConstants {
 	String BASIC = "B";
 	String FULL = "F";
 	
-	String DEFAULT_NATIONALITY = "Ghanian";
+	String DEFAULT_NATIONALITY = "Ghanaian";
+	String PHOTO_URL = "photos/";
 
 }

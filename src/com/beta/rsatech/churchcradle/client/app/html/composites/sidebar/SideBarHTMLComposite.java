@@ -2,9 +2,7 @@ package com.beta.rsatech.churchcradle.client.app.html.composites.sidebar;
 
 import com.beta.rsatech.churchcradle.client.elements.StrongElement;
 import com.beta.rsatech.churchcradle.client.resources.GlobalResources;
-import com.beta.rsatech.churchcradle.client.utils.GeneralEventHandler;
-import com.beta.rsatech.churchcradle.client.utils.Utils;
-import com.beta.rsatech.churchcradle.shared.BlobstoreModel;
+import com.beta.rsatech.churchcradle.shared.AppConstants;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.ImageElement;
@@ -50,21 +48,10 @@ public class SideBarHTMLComposite extends UIObject {
 			loadApprove();
 		}
 
-		
 		if(GlobalResources.getInstance().getModel().getAvatar() != null && !GlobalResources.getInstance().getModel().getAvatar().trim().isEmpty()){
-			Utils.retrieveFromBlobstore(GlobalResources.getInstance().getModel().getAvatar(), new GeneralEventHandler<BlobstoreModel>() {
-				
-				@Override
-				public void onSuccess(BlobstoreModel t) {
-					avatar.setSrc(t.getUrl());
-				}
-				
-				@Override
-				public void onError() {
-					// TODO Auto-generated method stub
-					
-				}
-			});
+			avatar.setSrc(AppConstants.PHOTO_URL+GlobalResources.getInstance().getModel().getAvatar());
+		}else{
+			avatar.setSrc(AppConstants.NO_IMAGE);
 		}
 		
 		

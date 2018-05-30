@@ -8,38 +8,48 @@
 	}
 	
 	.container {
-		padding: 5px;
+		padding-bottom: 15px;
 	}
 	
 	.container .infobox {
 		float: left;
-		width: 200px;
-		height: 20px;
-		padding: 20px 0 0 0;
+		width: 100%;
+		height: 26px;
 	}
 	
 	.container .positionbox {
 		float: left;
-		width: 100px;
-		padding: 20px 0 0 0;
+		width: 100%;
+		height: 26px;
 	}
 	
 	.container .frombox {
 		float: left;
-		width: 55px;
-		padding: 20px 0 0 0;
+		width: 100%;
+		height: 26px;
 	}
 	
 	.container .endbox {
 		float: left;
-		width: 55px;
+		width: 100%;
+		height: 26px;
 	}
 	</ui:style>
-	<g:HTMLPanel styleName="{style.container}">
-		<g:TextBox ui:field="infobox" styleName="{style.infobox}"></g:TextBox>
-		<g:TextBox ui:field="positionbox" styleName="{style.positionbox}"></g:TextBox>
-		<g:TextBox ui:field="frombox" styleName="{style.frombox}"></g:TextBox>
-		<g:TextBox ui:field="endbox" styleName="{style.endbox}"></g:TextBox>
+	<g:HTMLPanel styleName="panel-body {style.container}">
+		<div class="form-group">
+			<g:TextBox ui:field="infobox" styleName="form-control"></g:TextBox>
+		</div>
+		
+		<div class="form-group">
+			<g:TextBox ui:field="positionbox" styleName="form-control"></g:TextBox>
+		</div>
+		
+		<div class="form-group">
+			<g:TextBox ui:field="frombox" styleName="form-control"></g:TextBox>
+		</div>
+		<div class="form-group">
+			<g:TextBox ui:field="endbox" styleName="form-control"></g:TextBox>
+		</div>
 		<div class="{style.clearfix}"></div>
 	</g:HTMLPanel>
 </ui:UiBinder> 

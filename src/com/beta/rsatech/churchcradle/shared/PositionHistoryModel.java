@@ -3,7 +3,7 @@ package com.beta.rsatech.churchcradle.shared;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 public class PositionHistoryModel implements IsSerializable{
-	private int id, memberId;
+	private int id, memberId, churchId;
 	private String name, beginDate, endDate, position;
 	public int getId() {
 		return id;
@@ -40,6 +40,12 @@ public class PositionHistoryModel implements IsSerializable{
 	}
 	public void setMemberId(int memberId) {
 		this.memberId = memberId;
+	}
+	public int getChurchId() {
+		return churchId;
+	}
+	public void setChurchId(int churchId) {
+		this.churchId = churchId;
 	}
 	
 }
